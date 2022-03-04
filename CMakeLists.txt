@@ -8,6 +8,9 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+add_executable(RPG main.cpp Enemy.cpp Enemy.h Item.cpp Item.h Player.cpp Player.h Entities.cpp Entities.h Utility.cpp Utility.h EnemyFactory.cpp EnemyFactory.h Game.cpp Game.h)
+
+
 ###############################################################################
 
 # external dependencies
