@@ -17,10 +17,10 @@ void Player::Kill(Enemy* &enemy) {
         ++lvl;
         experience -= lvl * lvl;
     }
-    for(auto drop: enemy->dropTable);
+    /*for(auto drop: enemy->dropTable);
     {
 
-    }
+    }*/
     delete enemy;
     enemy = nullptr;
 

@@ -11,11 +11,11 @@ public:
     Entities(int hp, int mana, int atk, int dex, int def);
     Entities();
 protected:
+    int hp;
     int mana;
     int atk;
     int dex;
     int def;
-    int hp;
 };
 
 

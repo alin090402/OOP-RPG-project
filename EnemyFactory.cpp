@@ -21,4 +21,4 @@ void EnemyFactory::init()
 EnemyFactory::EnemyFactory(std::string name, int hp, int mana, int atk, int dex, int def, int xpGiven,
                            std::vector<std::pair<Item *, float>> dropTable) : Entities(hp, mana, atk, dex, def),
                                                                                      xp_given(xpGiven),
-                                                                                     dropTable(std::move(dropTable)), name(std::move(name)) {}
+                                                                                     name(std::move(name)), dropTable(std::move(dropTable)) {}

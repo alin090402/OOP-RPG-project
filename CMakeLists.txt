@@ -27,7 +27,7 @@ add_executable(RPG main.cpp Enemy.cpp Enemy.h Item.cpp Item.h Player.cpp Player.
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml when changing name here
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp  Enemy.cpp Enemy.h Item.cpp Item.h Player.cpp Player.h Entities.cpp Entities.h Utility.cpp Utility.h EnemyFactory.cpp EnemyFactory.h Game.cpp Game.h)
 
 ###############################################################################
 
