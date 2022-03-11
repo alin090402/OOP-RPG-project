@@ -12,10 +12,13 @@
 class Game {
     static Player player;
 
+public:
     static void Init();
 
+private:
     static void Menu();
-
+    static void Fight(Enemy* &enemy);
+    static void Choose_Enemy();
 
 };
 

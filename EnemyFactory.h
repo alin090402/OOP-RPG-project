@@ -10,12 +10,12 @@
 #include "Enemy.h"
 
 class EnemyFactory: public Entities{
+    friend std::ostream& operator<<(std::ostream& file, const EnemyFactory& enemyFactory);
     int xp_given;
     std::string name;
     std::vector<std::pair<Item*, float> > dropTable;
 public:
     static std::vector< EnemyFactory* > EnemyTypes;
-public:
     EnemyFactory(std::string name, int hp, int mana, int atk, int dex, int def, int xpGiven,
                  std::vector<std::pair<Item *, float>> dropTable);
 

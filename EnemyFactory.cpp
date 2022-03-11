@@ -5,6 +5,7 @@
 #include "EnemyFactory.h"
 
 #include <utility>
+#include <istream>
 
 std::vector<EnemyFactory*> EnemyFactory::EnemyTypes;
 
@@ -22,3 +23,7 @@ EnemyFactory::EnemyFactory(std::string name, int hp, int mana, int atk, int dex,
                            std::vector<std::pair<Item *, float>> dropTable) : Entities(hp, mana, atk, dex, def),
                                                                                      xp_given(xpGiven),
                                                                                      name(std::move(name)), dropTable(std::move(dropTable)) {}
+std::ostream& operator<<(std::ostream& file, const EnemyFactory& enemyFactory) {
+    file << enemyFactory.name << "(hp:" << enemyFactory.hp << ", atk:" << enemyFactory.atk << ")";
+    return file;
+}

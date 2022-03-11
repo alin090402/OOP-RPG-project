@@ -4,6 +4,8 @@
 
 #include "Item.h"
 
+#include <utility>
+
 int Item::UseItem(int quantity_)
 {
     if(quantity < quantity_)
@@ -24,7 +26,11 @@ void Item::getItem(int quantity_)
     quantity += quantity_;
 }
 
-Item::Item(const std::string &name, const std::string &description, int id, int quantity) : name(name),
-                                                                                            description(description),
+Item::Item(std::string name, std::string description, int id, int quantity) : name(std::move(name)),
+                                                                                            description(std::move(description)),
                                                                                             id(id),
                                                                                             quantity(quantity) {}
+
+int Item::getId() const {
+    return id;
+}

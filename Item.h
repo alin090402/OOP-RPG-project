@@ -13,10 +13,14 @@ class Item {
     std::string name;
     std::string description;
     int id;
+public:
+    int getId() const;
+
+private:
     int quantity;
 
 public:
-    Item(const std::string &name, const std::string &description, int id, int quantity);
+    Item(std::string name, std::string description, int id, int quantity);
 
 private:
     int UseItem(int quantity_);

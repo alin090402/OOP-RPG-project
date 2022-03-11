@@ -11,7 +11,7 @@
 class Utility {
     public:
     static void Init();
-    static std::vector<float> Random(int count); // return an float number between 0 and 1
+    static std::vector<float> Random(int count); // return a float number between 0 and 1
 };
 
 
