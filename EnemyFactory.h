@@ -21,6 +21,7 @@ public:
 
     Enemy* CreateEnemy();
     static void init();
+    static void Finish();
 
 };
 

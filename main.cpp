@@ -5,7 +5,7 @@
 
 int main() {
     Game::Init();
-
+    EnemyFactory::Finish();
 
     return 0;
 }

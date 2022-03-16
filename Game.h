@@ -15,6 +15,7 @@ class Game {
 public:
     static void Init();
 
+
 private:
     static void Menu();
     static void Fight(Enemy* &enemy);

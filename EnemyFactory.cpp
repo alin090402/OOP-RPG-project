@@ -27,3 +27,11 @@ std::ostream& operator<<(std::ostream& file, const EnemyFactory& enemyFactory) {
     file << enemyFactory.name << "(hp:" << enemyFactory.hp << ", atk:" << enemyFactory.atk << ")";
     return file;
 }
+
+void EnemyFactory::Finish() {
+    for(auto enemy: EnemyFactory::EnemyTypes)
+    {
+        delete enemy;
+        enemy = nullptr;
+    }
+}

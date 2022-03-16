@@ -32,7 +32,7 @@ void Game::Choose_Enemy() {
     std::cin >> option;
     while(stoi(option) > (int) EnemyFactory::EnemyTypes.size())
         std::cin >> option;
-    Enemy* enemy = EnemyFactory::EnemyTypes[std::stoi(option) - 11]->CreateEnemy();
+    Enemy* enemy = EnemyFactory::EnemyTypes[std::stoi(option) - 1]->CreateEnemy();
     Fight(enemy);
 }
 
