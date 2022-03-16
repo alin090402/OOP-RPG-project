@@ -39,4 +39,6 @@ void Game::Choose_Enemy() {
 void Game::Fight(Enemy* &enemy) {
     player.hit(enemy);
     player.hit(enemy);
+    player.hit(enemy);
+    delete enemy;
 }
