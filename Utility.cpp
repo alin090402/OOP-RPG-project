@@ -12,10 +12,10 @@ void Utility::Init()
 }
 
 
-std::vector<float> Utility::Random(int count) {
-    std::vector<float>v;
+std::vector<double> Utility::Random(int count) {
+    std::vector<double>v;
 
     for(int i = 0; i < count; i++)
-        v.push_back((float) std::rand()/RAND_MAX);
+        v.push_back((double) std::rand()/RAND_MAX);
     return v;
 }
