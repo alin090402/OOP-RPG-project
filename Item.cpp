@@ -34,3 +34,9 @@ Item::Item(std::string name, std::string description, int id, int quantity) : na
 int Item::getId() const {
     return id;
 }
+
+std::ostream &operator<<(std::ostream &os, const Item &item) {
+    os << "name: " << item.name << " description: " << item.description << " id: " << item.id << " quantity: "
+       << item.quantity;
+    return os;
+}

@@ -8,13 +8,13 @@
 
 #include <vector>
 #include <string>
-#include "Entities.h"
+#include "Entity.h"
 #include "Player.h"
 
 
 class Item;
 
-class Enemy: public Entities {
+class Enemy: public Entity {
 private:
     Enemy( std::string name, int hp, int mana, int atk, int dex, int def, int xpGiven,
           std::vector<std::pair<Item *, float>> dropTable);

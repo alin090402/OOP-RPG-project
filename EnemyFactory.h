@@ -9,7 +9,7 @@
 #include <vector>
 #include "Enemy.h"
 
-class EnemyFactory: public Entities{
+class EnemyFactory: public Entity{
     friend std::ostream& operator<<(std::ostream& file, const EnemyFactory& enemyFactory);
     int xp_given;
     std::string name;

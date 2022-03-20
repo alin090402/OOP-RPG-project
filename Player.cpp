@@ -6,7 +6,7 @@
 #include "Player.h"
 #include "Enemy.h"
 
-Player::Player(Entities entities) : Entities(entities), Inventory(), lvl(0), experience(0) {
+Player::Player(Entity entities) : Entity(entities), Inventory(), lvl(0), experience(0) {
 }
 
 void Player::Kill(Enemy* &enemy) {

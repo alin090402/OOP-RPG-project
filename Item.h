@@ -22,6 +22,8 @@ private:
 public:
     Item(std::string name, std::string description, int id, int quantity);
 
+    friend std::ostream &operator<<(std::ostream &os, const Item &item);
+
 private:
     int UseItem(int quantity_);
 

@@ -6,12 +6,12 @@
 #define RPG_PLAYER_H
 
 #include <vector>
-#include "Entities.h"
+#include "Entity.h"
 class Enemy;
 class Item;
-class Player: public Entities {
+class Player: public Entity {
 public:
-    explicit Player(Entities entities);
+    explicit Player(Entity entities);
     void hit(Enemy* &enemy);
     Player();
 

@@ -10,7 +10,7 @@ Player Game::player;
 void Game::Init()
 {
     EnemyFactory::init();
-    Entities stats(100, 10, 10, 2, 2);
+    Entity stats(100, 10, 10, 2, 2);
     player = Player(stats);
     Game::Menu();
 }
@@ -34,11 +34,20 @@ void Game::Choose_Enemy() {
         std::cin >> option;
     Enemy* enemy = EnemyFactory::EnemyTypes[std::stoi(option) - 1]->CreateEnemy();
     Fight(enemy);
+    delete enemy;
 }
 
 void Game::Fight(Enemy* &enemy) {
-    player.hit(enemy);
-    player.hit(enemy);
-    player.hit(enemy);
-    delete enemy;
+    std::string option;
+    while(true)
+    {
+        std::cout << "1. Atack\n";
+        std::cin >> option;
+        if(option == "1")
+        {
+            player.hit(enemy);
+        }
+        if(enemy == nullptr)
+            return;
+    }
 }
