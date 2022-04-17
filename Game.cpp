@@ -4,13 +4,13 @@
 
 #include <iostream>
 #include "Game.h"
-
+/*
 Player Game::player;
 
 void Game::Init()
 {
     EnemyFactory::init();
-    Entity stats(100, 10, 10, 2, 2);
+    Entity stats(100, 10, 10, 2, 2, 0, std::string());
     player = Player(stats);
     Game::Menu();
 }
@@ -51,3 +51,4 @@ void Game::Fight(Enemy* &enemy) {
             return;
     }
 }
+*/

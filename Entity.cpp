@@ -3,31 +3,49 @@
 //
 
 #include "Entity.h"
+#include "Equipment.h"
+#include <utility>
+//#include "Weapon.h"
 
-Entity::Entity(int hp, int mana, int atk, int dex, int def) : hp(hp), mana(mana), atk(atk), dex(dex), def(def) {}
+Entity::Entity(std::string name, const Stats &baseStats, int chestplate, int boots, int ring, int helmet, int weapon)
+        : name(std::move(name)), base_stats(baseStats), currentHP(baseStats.hp),
+        chestplate(chestplate), boots(boots), ring(ring), helmet(helmet), weapon(weapon) {}
 
-Entity::Entity() : hp(0), mana(0), atk(0), dex(0), def(0){
+void Entity::Attack(Entity *enemy, Attack_type attackType) {
+    int damage;
+    damage = base_stats.atk;
+    if(attackType == Attack_type::Light_Attack)
+    {
+        //damage = dynamic_cast<Weapon *> Item::Items[this->Weapon].LightAttack
+    }
+    //TODO: implementarea tipurilor de atacuri si a sansei de reusita
 
+    enemy->currentHP -= damage;
 }
 
+Stats Entity::stats() const {
+    Stats total_stats = base_stats;
+    for(auto equipment:equipments())
+    {
+        try{
+            auto* p = dynamic_cast< Equipment* > (Item::getItemList()[equipment]);
+            if(p)
+                total_stats = total_stats + p->bonus_stats;
+                //TODO: adauga alte exceptie pentru cand pe poz respectiva nu este un Equipment
+            else throw(-1);
+        }
+        catch(int) {
 
-Entity::Entity(const Entity &other): hp(other.hp), mana(other.mana), atk(other.atk), dex(other.dex), def(other.def){
 
+        }
+    }
+    return total_stats;
 }
 
-Entity &Entity::operator = (const Entity &other) {
-    this->hp = other.hp;
-    this->mana = other.mana;
-    this->atk = other.atk;
-    this->dex = other.dex;
-    this->def = other.def;
-    return *this;
+std::vector<int> Entity::equipments() const {
+    return std::vector<int>{chestplate, boots, ring, helmet, weapon};
 }
 
-std::ostream &operator<<(std::ostream &os, const Entity &entity) {
-    os << "hp: " << entity.hp << " mana: " << entity.mana << " atk: " << entity.atk << " dex: " << entity.dex
-       << " def: " << entity.def;
-    return os;
+[[maybe_unused]] bool Entity::isAlive() const {
+    return currentHP > 0;
 }
-
-

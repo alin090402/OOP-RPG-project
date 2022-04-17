@@ -7,21 +7,22 @@
 
 
 #include "Player.h"
+/*
 #include "EnemyFactory.h"
 
 class Game {
-    static Player player;
-
+    Player player;
+    EnemyFactory enemyFactory;
 public:
-    static void Init();
+    void Init();
 
 
 private:
-    static void Menu();
-    static void Fight(Enemy* &enemy);
-    static void Choose_Enemy();
+    void Menu();
+    void Fight(Enemy* &enemy);
+    void Choose_Enemy();
 
 };
 
-
+*/
 #endif //RPG_GAME_H

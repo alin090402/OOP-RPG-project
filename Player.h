@@ -7,20 +7,22 @@
 
 #include <vector>
 #include "Entity.h"
-class Enemy;
 class Item;
+class Monster;
 class Player: public Entity {
 public:
-    explicit Player(Entity entities);
-    void hit(Enemy* &enemy);
-    Player();
+    Player(const std::string &name, const Stats &baseStats, int chestplate, int boots, int ring, int helmet, int weapon,
+           int coins, int lvl, int experience, std::vector<std::pair<int, int>> inventory);
+
+    void Loot(Monster* monster);
+    void IncreaseExperience(int xp);
+    void GetItem(int id, int count);
 
 private:
-    friend class Enemy;
-    void Kill(Enemy* &enemy);
-    std::vector<Item* > Inventory;
-    int lvl{};
-    int experience{};
+    int coins;
+    int lvl;
+    int experience;
+    std::vector<std::pair<int,int> > inventory;
 
 
 };

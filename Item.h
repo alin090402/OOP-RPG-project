@@ -8,27 +8,31 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
+#include <unordered_map>
 
-class Item {
-    std::string name;
-    std::string description;
-    int id;
-public:
-    int getId() const;
+enum class Item_type {Chestplate, Boots, Ring, Helmet, Incredient, Sword, Bow};
 
-private:
-    int quantity;
+ class Item {
+ public:
+     Item(int id, Item_type type, std::string name);
 
-public:
-    Item(std::string name, std::string description, int id, int quantity);
 
-    friend std::ostream &operator<<(std::ostream &os, const Item &item);
+     friend void ItemInit(std::istream &is);
 
-private:
-    int UseItem(int quantity_);
+     virtual ~Item();
 
-    void getItem(int q);
+     static const std::vector<Item *> &getItemList();
 
+     static const std::unordered_map<int, int> &getIdToPos();
+
+
+ private:
+     int id;
+     Item_type type;
+     std::string name;
+     static std::vector<Item*> itemList;
+     static std::unordered_map<int, int> id_to_pos;
 
 };
 

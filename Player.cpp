@@ -3,39 +3,40 @@
 //
 
 #include <iostream>
+#include <utility>
 #include "Player.h"
-#include "Enemy.h"
-
-Player::Player(Entity entities) : Entity(entities), Inventory(), lvl(0), experience(0) {
-}
-
-void Player::Kill(Enemy* &enemy) {
-    std::cout << enemy->name <<" has been killed.\n";
-    experience += enemy->xp_given;
-    while(experience > lvl * lvl)
+#include "Monster.h"
+#include "Utility.h"
+void Player::Loot(Monster* monster) {
+    coins += monster -> goldGiven;
+    IncreaseExperience(monster->xpGiven);
+    auto random = Utility::Random(monster->loot.size());
+    for(unsigned int i = 0; i < monster->loot.size(); i++)
     {
-        ++lvl;
-        experience -= lvl * lvl;
+        if(random[i] <= monster->loot[i].second)
+            GetItem(monster->loot[i].first, 1);
     }
-    /*for(auto drop: enemy->dropTable);
+}
+
+void Player::IncreaseExperience(int xp) {
+    experience += xp;
+    while(experience > lvl * lvl * 5)
     {
-
-    }*/
-    delete enemy;
-    enemy = nullptr;
-
-}
-
-void Player::hit(Enemy* &enemy) {
-    if(enemy == nullptr) {
-        std::cout << "Ce faci ma? E deja mort.\n";
-        return;
+        experience -= lvl * lvl * 5;
+        lvl++;
     }
-    enemy -> hp -= (atk);
-    std::cout<<"You hit " << enemy-> name << " with " << atk << " damage. Enemy hp: " << enemy->hp << "\n";
-    if(enemy -> hp <= 0)
-        Kill(enemy);
-
 }
 
-Player::Player() = default;
+void Player::GetItem(int id, int count) {
+    for(auto slot: inventory)
+        if(slot.first == id)
+        {
+            slot.second += count;
+            return;
+        }
+}
+
+Player::Player(const std::string &name, const Stats &baseStats, int chestplate, int boots, int ring, int helmet,
+               int weapon, int coins, int lvl, int experience, std::vector<std::pair<int, int>> inventory)
+        : Entity(name, baseStats, chestplate, boots, ring, helmet, weapon), coins(coins), lvl(lvl),
+          experience(experience), inventory(std::move(inventory)) {}

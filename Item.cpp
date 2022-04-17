@@ -6,37 +6,23 @@
 
 #include <utility>
 
-int Item::UseItem(int quantity_)
-{
-    if(quantity < quantity_)
-    {
-        std::cout << "Nu ai destule iteme\n";
-        return -1; // cod nu ai destule iteme
-    }
-    quantity -= quantity_;
-    if(quantity == 0) {
-        delete this;
-        return -2; // cod ai ramas cu 0 iteme
-    }
-    return 0; // totul o mers bine
+std::vector<Item*> Item::itemList;
+std::unordered_map<int, int> Item::id_to_pos;
+
+
+Item::Item(int id, Item_type type, std::string name) : id(id), type(type), name(std::move(name)) {}
+
+void ItemInit([[maybe_unused]]std::istream &is) {
+    //TODO: de citit iteme din CSV si de creat vectorul de iteme;
 }
 
-void Item::getItem(int quantity_)
-{
-    quantity += quantity_;
+const std::vector<Item *> &Item::getItemList() {
+    return itemList;
 }
 
-Item::Item(std::string name, std::string description, int id, int quantity) : name(std::move(name)),
-                                                                                            description(std::move(description)),
-                                                                                            id(id),
-                                                                                            quantity(quantity) {}
-
-int Item::getId() const {
-    return id;
+const std::unordered_map<int, int> &Item::getIdToPos() {
+    return id_to_pos;
 }
 
-std::ostream &operator<<(std::ostream &os, const Item &item) {
-    os << "name: " << item.name << " description: " << item.description << " id: " << item.id << " quantity: "
-       << item.quantity;
-    return os;
-}
+
+Item::~Item() = default;
