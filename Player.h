@@ -14,6 +14,7 @@ public:
     Player(const std::string &name, const Stats &baseStats, int chestplate, int boots, int ring, int helmet, int weapon,
            int coins, int lvl, int experience, std::vector<std::pair<int, int>> inventory);
 
+
     void Loot(Monster* monster);
     void IncreaseExperience(int xp);
     void GetItem(int id, int count);

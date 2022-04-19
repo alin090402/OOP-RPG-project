@@ -3,52 +3,36 @@
 //
 
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include "Game.h"
-/*
-Player Game::player;
 
-void Game::Init()
+Game::Game(const std::string& dirr_name) : player("Alin", Stats(100,50,10,5,10), 0, 0, 0, 0, 0, 0, 1, 0, std::vector<std::pair<int,int> >())
 {
-    EnemyFactory::init();
-    Entity stats(100, 10, 10, 2, 2, 0, std::string());
-    player = Player(stats);
-    Game::Menu();
-}
+    InitPlayer(dirr_name + "/player.txt");
+    //InitItems(dirr_name + "/items.txt");
+    //InitMonsters(dirr_name + "/monsters.txt");
 
-void Game::Menu() {
-    std::string option;
-    std::cout << "1. Fight\n";
-    std::cout <<"2. Shop\n";
-    std:: cin >> option;
-    if(option == "1")
-        Game::Choose_Enemy();
-}
 
-void Game::Choose_Enemy() {
-    std::string option;
-    int i = 0;
-    for(auto enemy: EnemyFactory::EnemyTypes)
-        std::cout << ++i << ". " << *enemy << "\n";
-    std::cin >> option;
-    while(stoi(option) > (int) EnemyFactory::EnemyTypes.size())
-        std::cin >> option;
-    Enemy* enemy = EnemyFactory::EnemyTypes[std::stoi(option) - 1]->CreateEnemy();
-    Fight(enemy);
-    delete enemy;
 }
-
-void Game::Fight(Enemy* &enemy) {
-    std::string option;
-    while(true)
-    {
-        std::cout << "1. Atack\n";
-        std::cin >> option;
-        if(option == "1")
-        {
-            player.hit(enemy);
+void Game::InitPlayer(const std::string& filename)
+{
+    char s[500];
+    std::ifstream  fin(filename);
+    fin.getline(s, 500);
+    //TODO: citeste playerul din csv
+}
+void CSVParser(const std::string& filename, std::vector<std::pair<int,int> >& v) {
+    char s[500];
+    std::ifstream fin(filename);
+    fin.getline(s, 500);
+    while(fin.getline(s, 500)) {
+        std::stringstream ss(s);
+        std::string item;
+        std::vector<std::string> tokens;
+        while(std::getline(ss, item, ',')) {
+            tokens.push_back(item);
         }
-        if(enemy == nullptr)
-            return;
+        v.emplace_back(std::stoi(tokens[0]), std::stoi(tokens[1]));
     }
 }
-*/

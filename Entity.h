@@ -28,10 +28,16 @@ protected:
 
 public:
     Entity(std::string name, const Stats &baseStats, int chestplate, int boots, int ring, int helmet, int weapon);
+
+    Entity();
+
+
     void Attack(Entity* enemy, Attack_type attackType);
     [[nodiscard]] Stats stats() const;
 
     [[maybe_unused]] [[nodiscard]] bool isAlive() const;
+
+    friend std::ostream &operator<<(std::ostream &os, const Entity &entity);
 
 
 };

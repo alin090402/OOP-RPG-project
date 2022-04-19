@@ -10,6 +10,8 @@
 
 class Utility {
     public:
+    static std::vector<std::string> CSVParser(const std::string& line);
+    static std::vector<std::string> ReadFile(const std::string& fileName);
     static void Init();
     static std::vector<double> Random(unsigned int count); // return a float number between 0 and 1
 };

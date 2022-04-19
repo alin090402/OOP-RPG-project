@@ -49,3 +49,13 @@ std::vector<int> Entity::equipments() const {
 [[maybe_unused]] bool Entity::isAlive() const {
     return currentHP > 0;
 }
+
+std::ostream &operator<<(std::ostream &os, const Entity &entity) {
+    os << "name: " << entity.name << "\nbase_stats: " << entity.base_stats << "\ncurrentHP: " << entity.currentHP
+       << "\nchestplate: " << entity.chestplate << "\nboots: " << entity.boots << "\nring: " << entity.ring << "\nhelmet: "
+       << entity.helmet << "\nweapon: " << entity.weapon;
+    return os;
+}
+
+Entity::Entity() = default;
+

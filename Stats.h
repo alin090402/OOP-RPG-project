@@ -15,6 +15,7 @@ struct Stats {
 
     //friend std::ostream &operator<<(std::ostream &os, const Stats &stats);
     friend Stats operator+(const Stats &a, const Stats &b);
+    friend std::ostream &operator<<(std::ostream &os, const Stats &stats);
 
     int hp;
     int mana;

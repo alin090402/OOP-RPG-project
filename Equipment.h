@@ -10,16 +10,22 @@
 
 class Equipment : public Item{
 public:
-    Equipment(int id, Item_type type, const std::string &name, const Stats &bonusStats, int price,
-              const std::vector<std::pair<int, int>> &recipe, int requiredLevel);
+    Equipment(int id, Item_type type, const std::string &name, const Stats &bonusStats, int price, int requiredLevel,
+              std::vector<std::pair<int, int>> recipe);
 
     [[nodiscard]] const std::vector<std::pair<int, int>> &getRecipe() const;
     friend Stats Entity::stats() const;
+
+protected:
+    void Afisare(std::ostream &os)const override;
+
 private:
     Stats bonus_stats;
     int price;
-    std::vector<std::pair<int, int> >recipe; // id, quantity
     int requiredLevel;
+    std::vector<std::pair<int, int> >recipe; // id, quantity
+
+
 };
 
 

@@ -7,22 +7,15 @@
 
 
 #include "Player.h"
-/*
-#include "EnemyFactory.h"
 
 class Game {
-    Player player;
-    EnemyFactory enemyFactory;
 public:
-    void Init();
-
+    Game(const std::string& dirr_name);
 
 private:
-    void Menu();
-    void Fight(Enemy* &enemy);
-    void Choose_Enemy();
+   Player player;
+   void InitPlayer(const std::string& filename);
 
 };
 
-*/
 #endif //RPG_GAME_H

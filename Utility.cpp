@@ -4,6 +4,9 @@
 
 #include <cstdlib>
 #include <ctime>
+#include <string>
+#include <sstream>
+#include <fstream>
 #include "Utility.h"
 void Utility::Init()
 {
@@ -11,6 +14,17 @@ void Utility::Init()
 
 }
 
+std::vector<std::string> Utility::CSVParser(const std::string& line)
+{
+    std::vector<std::string> values;
+    std::stringstream ss(line);
+    std::string item;
+    while (std::getline(ss, item, ','))
+    {
+        values.push_back(item);
+    }
+    return values;
+}
 
 std::vector<double> Utility::Random(unsigned int count) {
     std::vector<double>v;
@@ -19,3 +33,15 @@ std::vector<double> Utility::Random(unsigned int count) {
         v.push_back((double) std::rand() / RAND_MAX);
     return v;
 }
+
+std::vector<std::string> Utility::ReadFile(const std::string &fileName) {
+    std::vector<std::string> lines;
+    std::ifstream file(fileName);
+    std::string line;
+    while (std::getline(file, line))
+    {
+        lines.push_back(line);
+    }
+    return lines;
+}
+
