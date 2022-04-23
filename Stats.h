@@ -9,7 +9,8 @@
 #include <string>
 #include <ostream>
 
-struct Stats {
+class Stats {
+public:
     Stats(int hp, int mana, int atk, int def, int dex);
     Stats();
 
@@ -17,6 +18,17 @@ struct Stats {
     friend Stats operator+(const Stats &a, const Stats &b);
     friend std::ostream &operator<<(std::ostream &os, const Stats &stats);
 
+    [[nodiscard]] int getHp() const;
+
+    [[nodiscard]] int getMana() const;
+
+    [[nodiscard]] int getAtk() const;
+
+    [[nodiscard]] int getDef() const;
+
+    [[nodiscard]] int getDex() const;
+
+private:
     int hp;
     int mana;
     int atk;

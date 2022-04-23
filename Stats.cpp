@@ -24,3 +24,23 @@ Stats operator+(const Stats &a, const Stats &b) {
     answer.dex = a.dex + b.dex;
     return answer;
 }
+
+int Stats::getHp() const {
+    return hp;
+}
+
+int Stats::getMana() const {
+    return mana;
+}
+
+int Stats::getAtk() const {
+    return atk;
+}
+
+int Stats::getDef() const {
+    return def;
+}
+
+int Stats::getDex() const {
+    return dex;
+}

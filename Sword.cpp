@@ -7,7 +7,7 @@
 //TODO: implement attack formulas
 
 std::pair<int, float> Sword::LightAttack() {
-    return {};
+    return {minDamage, 0.5};
 }
 
 std::pair<int, float> Sword::MediumAttack() {

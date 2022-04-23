@@ -8,7 +8,7 @@
 #include "Stats.h"
 #include "Entity.h"
 
-class Equipment : public Item{
+class Equipment :public Item{
 public:
     Equipment(int id, Item_type type, const std::string &name, const Stats &bonusStats, int price, int requiredLevel,
               std::vector<std::pair<int, int>> recipe);

@@ -11,7 +11,7 @@
 #include <vector>
 #include <unordered_map>
 
-enum class Item_type {Chestplate, Boots, Ring, Helmet, Ingredient, Sword, Bow};
+enum class Item_type {Chestplate, Boots, Ring, Helmet, Ingredient, Sword, Bow, None};
 
  class Item {
  public:

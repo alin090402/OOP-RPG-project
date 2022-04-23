@@ -13,10 +13,12 @@
 
 class Entity {
 
-private:
+
+protected:
     std::string name;
     Stats base_stats;
     int currentHP;
+private:
     [[nodiscard]] std::vector<int> equipments() const;
 
 protected:
@@ -31,13 +33,19 @@ public:
 
     Entity();
 
-
+    void Heal();
     void Attack(Entity* enemy, Attack_type attackType);
     [[nodiscard]] Stats stats() const;
 
     [[maybe_unused]] [[nodiscard]] bool isAlive() const;
 
     friend std::ostream &operator<<(std::ostream &os, const Entity &entity);
+
+    [[nodiscard]] const std::string &getName() const;
+
+    int getCurrentHp() const;
+
+    int getWeapon() const;
 
 
 };

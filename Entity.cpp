@@ -8,12 +8,12 @@
 //#include "Weapon.h"
 
 Entity::Entity(std::string name, const Stats &baseStats, int chestplate, int boots, int ring, int helmet, int weapon)
-        : name(std::move(name)), base_stats(baseStats), currentHP(baseStats.hp),
+        : name(std::move(name)), base_stats(baseStats), currentHP(baseStats.getHp()),
         chestplate(chestplate), boots(boots), ring(ring), helmet(helmet), weapon(weapon) {}
 
 void Entity::Attack(Entity *enemy, Attack_type attackType) {
     int damage;
-    damage = base_stats.atk;
+    damage = base_stats.getAtk();
     if(attackType == Attack_type::Light_Attack)
     {
         //damage = dynamic_cast<Weapon *> Item::Items[this->Weapon].LightAttack
@@ -55,6 +55,22 @@ std::ostream &operator<<(std::ostream &os, const Entity &entity) {
        << "\nchestplate: " << entity.chestplate << "\nboots: " << entity.boots << "\nring: " << entity.ring << "\nhelmet: "
        << entity.helmet << "\nweapon: " << entity.weapon;
     return os;
+}
+
+const std::string &Entity::getName() const {
+    return name;
+}
+
+int Entity::getCurrentHp() const {
+    return currentHP;
+}
+
+int Entity::getWeapon() const {
+    return weapon;
+}
+
+void Entity::Heal() {
+    currentHP = base_stats.getHp();
 }
 
 Entity::Entity() = default;

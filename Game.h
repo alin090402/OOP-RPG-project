@@ -10,12 +10,19 @@
 
 class Game {
 public:
-    Game(const std::string& dirr_name);
-
+    explicit Game(const std::string& dirr_name);
+    void MainMenu();
 private:
-   Player player;
-   void InitPlayer(const std::string& filename);
 
+    Player player;
+    void Fight(Monster monster);
+    void FightMenu();
+
+    void ShopMenu();
+
+    void Save();
+
+    void Load();
 };
 
 #endif //RPG_GAME_H

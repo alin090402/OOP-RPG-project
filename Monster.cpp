@@ -63,3 +63,15 @@ std::ostream &operator<<(std::ostream &os, const Monster &monster) {
     }
     return os;
 }
+
+int Monster::getXpGiven() const {
+    return xpGiven;
+}
+
+int Monster::getGoldGiven() const {
+    return goldGiven;
+}
+
+const std::vector<std::pair<int, double>> &Monster::getLoot() const {
+    return loot;
+}

@@ -27,6 +27,9 @@ void Item::ItemInit(const std::string& file_name) {
         std::string &tip = data[0];
         int id = std::stoi(data[1]);
         std::string name = data[2];
+
+        id_to_pos[id] = Item::itemList.size();
+
         if(tip == "Ingredient")
         {
             int sell_price = std::stoi(data[3]);
@@ -42,6 +45,7 @@ void Item::ItemInit(const std::string& file_name) {
             int quantity = std::stoi(data[i + 1]);
             recipe.emplace_back(id_, quantity);
         }
+
         if(data[0] == "Chestplate")
         {
             Item::itemList.push_back(new Equipment(id, Item_type::Chestplate, name, stats, price, required_level, recipe));
@@ -73,8 +77,14 @@ void Item::ItemInit(const std::string& file_name) {
         if(data[0] == "Bow")
         {
             Item::itemList.push_back(new Bow(id, Item_type::Bow, name, stats, price, required_level, recipe, min_dmg, max_dmg));
+            continue;
         }
-        id_to_pos[id] = Item::itemList.size() - 1;
+        if(data[0] == "None")
+        {
+            Item::itemList.push_back(new Sword(id, Item_type::None, name, stats, price, required_level, recipe, min_dmg, max_dmg));
+            continue;
+        }
+
     }
 
 }
