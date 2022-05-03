@@ -21,6 +21,10 @@ enum class Item_type {Chestplate, Boots, Ring, Helmet, Ingredient, Sword, Bow, N
 
      virtual ~Item();
 
+     [[nodiscard]] virtual bool Craftable() const;
+
+     virtual void ShowRecipe(std::ostream &os) const;
+
      static const std::vector<Item *> &getItemList();
 
      static const std::unordered_map<int, unsigned int> &getIdToPos();

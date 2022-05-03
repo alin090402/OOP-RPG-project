@@ -12,6 +12,7 @@ public:
 
     [[nodiscard]] int getSellingPrice() const;
 
+
 private:
     int selling_price;
     void Afisare(std::ostream &os)const override;

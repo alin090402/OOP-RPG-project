@@ -16,6 +16,11 @@ public:
     [[nodiscard]] const std::vector<std::pair<int, int>> &getRecipe() const;
     friend Stats Entity::stats() const;
 
+    [[nodiscard]] bool Craftable() const override;
+
+    void ShowRecipe(std::ostream &os) const override;
+
+
 protected:
     void Afisare(std::ostream &os)const override;
 

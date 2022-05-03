@@ -23,6 +23,10 @@ private:
     void Save();
 
     void Load();
+
+    void Craft();
+
+    void Sell();
 };
 
 #endif //RPG_GAME_H

@@ -28,5 +28,15 @@ void Equipment::Afisare(std::ostream &os) const{
     }
 }
 
+bool Equipment::Craftable() const {
+    return true;
+}
+
+void Equipment::ShowRecipe(std::ostream &os) const {
+    for(auto &i : recipe) {
+        os<< i.first << " " << i.second << "\n";
+    }
+}
+
 
 

@@ -3,8 +3,6 @@
 //
 
 #include <iostream>
-#include <fstream>
-#include <sstream>
 #include "Game.h"
 #include "Item.h"
 #include "Player.h"
@@ -58,23 +56,25 @@ void Game::MainMenu() {
 }
 
 void Game::FightMenu() {
-    std::cout << "1. Exit\n";
-    for(unsigned int i = 0; i < Monster::getMonsterList().size(); i++)
-        std::cout << i+2 << ". " << Monster::getMonsterList()[i] << "\n";
-    std::cout << "Enter your choice: ";
-    unsigned int choice;
-    std::cin >> choice;
-    if(choice == 1) {
-        return;
+    while(true)
+    {
+        std::cout << "1. Exit\n";
+        for(unsigned int i = 0; i < Monster::getMonsterList().size(); i++)
+            std::cout << i+2 << ". " << Monster::getMonsterList()[i] << "\n";
+        std::cout << "Enter your choice: ";
+        unsigned int choice;
+        std::cin >> choice;
+        if(choice == 1) {
+            break;
+        }
+        else if(choice >= 2 && choice <= Monster::getMonsterList().size()+1) {
+            Fight(Monster::getMonsterList()[choice-2]);
+        }
+        else {
+            std::cout << "Invalid choice!\n";
+        }
     }
-    else if(choice >= 2 && choice <= Monster::getMonsterList().size()+1) {
-        Fight(Monster::getMonsterList()[choice-2]);
-        FightMenu();
-    }
-    else {
-        std::cout << "Invalid choice!\n";
-        FightMenu();
-    }
+
 
 
 }
@@ -121,6 +121,42 @@ void Game::Fight(Monster monster) {
 }
 
 void Game::ShopMenu() {
+    while(true)
+    {
+        std::cout << "SHOP\n";
+        std::cout << "1. Craft\n";
+        std::cout << "2. Sell\n";
+        std::cout << "3. Exit\n";
+        std::cout << "Enter your choice: ";
+        std::string choice_;
+        std::cin >> choice_;
+        int choice;
+        try
+        {
+            choice = std::stoi(choice_);
+        }
+        catch (std::runtime_error &err){
+            std::cout << "Invalid choice!\n";
+            continue;
+        }
+        switch (choice)
+        {
+            case 1:
+                Craft();
+                break;
+            case 2:
+                Sell();
+                break;
+            case 3:
+                return;
+            default:
+                std::cout << "Invalid choice!\n";
+                continue;
+
+
+        }
+    }
+
 
 }
 
@@ -129,6 +165,20 @@ void Game::Save() {
 }
 
 void Game::Load() {
+
+}
+
+void Game::Craft() {
+
+    std::cout << "Crafting menu\n";
+    std::cout << "1. Exit\n";
+    for(unsigned int i = 0; i < Item::getItemList().size(); i++)
+        if(Item::getItemList()[i]->Craftable())
+            std::cout << i + 2 << ". " << Item::getItemList()[i]->ShowRecipe << "\n";
+
+}
+
+void Game::Sell() {
 
 }
 

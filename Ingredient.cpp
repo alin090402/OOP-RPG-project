@@ -15,3 +15,4 @@ Ingredient::Ingredient(int id, const std::string &name, int sellingPrice) : Item
 void Ingredient::Afisare(std::ostream &os) const{
     os << "Ingredient: name:" << name << " id:" << id << " selling_price:" << selling_price << std::endl;
 }
+

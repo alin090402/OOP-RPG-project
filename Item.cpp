@@ -106,5 +106,13 @@ void Item::Afisare(std::ostream &os) const{
     os << "id: " << id << " name: " << name;
 }
 
+bool Item::Craftable() const {
+    return false;
+}
+
+void Item::ShowRecipe(std::ostream &os) const{
+    os << "No recipe for this item";
+}
+
 
 Item::~Item() = default;
