@@ -83,7 +83,7 @@ void Game::Fight(Monster monster) {
     std::cout << "You are fighting " << monster.getName() << "\n";
     player.Heal();
     monster.Heal();
-    while(player.isAlive() > 0 && monster.isAlive() > 0)
+    while(player.isAlive() && monster.isAlive())
     {
         std::cout << "your hp: " << player.getCurrentHp() << "     enemy hp: " << monster.getCurrentHp() << "\n";
         std::cout << "1.Light Attack\n";
@@ -217,6 +217,14 @@ void Game::Craft() {
 }
 
 void Game::Sell() {
+
+}
+
+Game::~Game() {
+    for(auto item : Item::getItemList())
+        delete item;
+
+
 
 }
 

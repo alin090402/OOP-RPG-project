@@ -23,6 +23,8 @@ public:
 
     int getRequiredLvl();
 
+    virtual ~Equipment();
+
 protected:
     void Afisare(std::ostream &os)const override;
 

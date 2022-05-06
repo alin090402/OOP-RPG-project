@@ -38,6 +38,8 @@ enum class Item_type {Chestplate, Boots, Ring, Helmet, Ingredient, Sword, Bow, N
      virtual void Afisare(std::ostream &os) const;
  private:
      static std::vector<Item*> itemList;
+
+ private:
      static std::unordered_map<unsigned int, unsigned int> id_to_pos;
 
  };

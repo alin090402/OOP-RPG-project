@@ -6,20 +6,20 @@
 #include "Utility.h"
 
 //TODO: implement attack formulas
-std::pair<int, float> Bow::LightAttack(Entity &entity) {
+std::pair<int, double> Bow::LightAttack(Entity &entity) {
 
     return {minDamage + entity.stats().getDex(), 1 - Utility::pow(0.9, entity.stats().getDex())};
 }
 
-std::pair<int, float> Bow::MediumAttack(Entity &entity) {
+std::pair<int, double> Bow::MediumAttack(Entity &entity) {
     return {Utility::Random(minDamage, maxDamage) + entity.stats().getDex(), 1 - Utility::pow(0.92, entity.stats().getDex())};
 }
 
-std::pair<int, float> Bow::HeavyAttack(Entity &entity) {
+std::pair<int, double> Bow::HeavyAttack(Entity &entity) {
     return {maxDamage + entity.stats().getDex(), 1 - Utility::pow(0.95, entity.stats().getDex())};
 }
 
-std::pair<int, float> Bow::SpecialAttack(Entity &entity) {
+std::pair<int, double> Bow::SpecialAttack(Entity &entity) {
     int mana = entity.getCurrentMp();
     if(mana < specialManaCost) {
         entity.UseMana(mana);
@@ -35,3 +35,5 @@ Bow::Bow(int id, Item_type type, const std::string &name, const Stats &bonusStat
                                                                                                 bonusStats, price,
                                                                                                 requiredLevel, recipe,
                                                                                                 minDamage, maxDamage, specialManaCost) {}
+
+Bow::~Bow() = default;

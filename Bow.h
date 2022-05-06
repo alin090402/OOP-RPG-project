@@ -11,11 +11,13 @@ public:
     Bow(int id, Item_type type, const std::string &name, const Stats &bonusStats, int price, int requiredLevel,
         const std::vector<std::pair<int, int>> &recipe, int minDamage, int maxDamage, int specialManaCost);
 
+    ~Bow() override;
+
 private:
-    std::pair<int, float> LightAttack(Entity &entity) override;
-    std::pair<int, float> MediumAttack(Entity &entity) override;
-    std::pair<int, float> HeavyAttack(Entity &entity) override;
-    std::pair<int, float> SpecialAttack(Entity &entity) override;
+    std::pair<int, double> LightAttack(Entity &entity) override;
+    std::pair<int, double> MediumAttack(Entity &entity) override;
+    std::pair<int, double> HeavyAttack(Entity &entity) override;
+    std::pair<int, double> SpecialAttack(Entity &entity) override;
 
 };
 

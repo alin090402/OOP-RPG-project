@@ -19,10 +19,12 @@ protected:
     int maxDamage;
     int specialManaCost;
 public:
-    virtual std::pair<int,float> LightAttack(Entity &entity) = 0; // returns the damage and the hit change
-    virtual std::pair<int,float> MediumAttack(Entity &entity) = 0;
-    virtual std::pair<int,float> HeavyAttack(Entity &entity) = 0;
-    virtual std::pair<int,float> SpecialAttack(Entity &entity) = 0;
+    virtual std::pair<int,double> LightAttack(Entity &entity) = 0; // returns the damage and the hit change
+    virtual std::pair<int,double> MediumAttack(Entity &entity) = 0;
+    virtual std::pair<int,double> HeavyAttack(Entity &entity) = 0;
+    virtual std::pair<int,double> SpecialAttack(Entity &entity) = 0;
+
+    ~Weapon() override;
 };
 
 

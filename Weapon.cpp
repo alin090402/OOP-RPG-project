@@ -20,3 +20,5 @@ void Weapon::Afisare(std::ostream &os) const{
     os << "Min damage: " << minDamage << std::endl;
     os << "Max damage: " << maxDamage << std::endl;
 }
+
+Weapon::~Weapon() = default;

@@ -32,7 +32,7 @@ void Entity::Attack(Entity *enemy, Attack_type attackType) {
                 damage =  pWeapon->SpecialAttack( *this);
                 break;
         }
-        if(Utility::Random() < damage.second)
+        if((float)Utility::Random() < damage.second)
         {
             enemy->currentHP -= damage.first;
         }

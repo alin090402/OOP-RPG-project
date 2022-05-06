@@ -28,7 +28,7 @@ void Item::ItemInit(const std::string& file_name) {
         int id = std::stoi(data[1]);
         std::string name = data[2];
 
-        id_to_pos[id] = Item::itemList.size();
+        id_to_pos[id] = (unsigned int) Item::itemList.size();
 
         if(tip == "Ingredient")
         {

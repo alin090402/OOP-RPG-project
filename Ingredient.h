@@ -12,6 +12,7 @@ public:
 
     [[nodiscard]] int getSellingPrice() const;
 
+    virtual ~Ingredient();
 
 private:
     int selling_price;

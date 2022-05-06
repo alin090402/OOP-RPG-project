@@ -12,6 +12,9 @@ class Game {
 public:
     explicit Game(const std::string& dirr_name);
     void MainMenu();
+
+    virtual ~Game();
+
 private:
 
     Player player;
@@ -27,6 +30,7 @@ private:
     void Craft();
 
     void Sell();
+
 };
 
 #endif //RPG_GAME_H

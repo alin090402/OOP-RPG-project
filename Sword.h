@@ -12,10 +12,14 @@ public:
           const std::vector<std::pair<int, int>> &recipe, int minDamage, int maxDamage, int specialManaCost);
 
 private:
-    std::pair<int, float> LightAttack(Entity &entity) override;
-    std::pair<int, float> MediumAttack(Entity &entity) override;
-    std::pair<int, float> HeavyAttack(Entity &entity) override;
-    std::pair<int, float> SpecialAttack(Entity &entity) override;
+public:
+    ~Sword() override;
+
+private:
+    std::pair<int, double> LightAttack(Entity &entity) override;
+    std::pair<int, double> MediumAttack(Entity &entity) override;
+    std::pair<int, double> HeavyAttack(Entity &entity) override;
+    std::pair<int, double> SpecialAttack(Entity &entity) override;
 
 };
 

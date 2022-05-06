@@ -16,3 +16,5 @@ void Ingredient::Afisare(std::ostream &os) const{
     os << "Ingredient: name:" << name << " id:" << id << " selling_price:" << selling_price << std::endl;
 }
 
+Ingredient::~Ingredient() = default;
+

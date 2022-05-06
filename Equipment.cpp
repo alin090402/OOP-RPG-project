@@ -42,5 +42,7 @@ int Equipment::getRequiredLvl() {
     return 0;
 }
 
+Equipment::~Equipment() = default;
+
 
 

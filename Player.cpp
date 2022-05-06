@@ -13,7 +13,7 @@
 void Player::Loot(Monster* monster) {
     coins += monster -> getGoldGiven();
     IncreaseExperience(monster->getXpGiven());
-    auto random = Utility::Random(monster->getLoot().size());
+    auto random = Utility::Random((unsigned int)monster->getLoot().size());
     for(unsigned int i = 0; i < monster->getLoot().size(); i++)
     {
         std::cout << "random" << random[i] << std::endl;
