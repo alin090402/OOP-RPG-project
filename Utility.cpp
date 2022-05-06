@@ -63,8 +63,8 @@ float Utility::pow(float base, int exp) {
     return result;
 }
 
-float Utility::Random() {
-    return (float) std::rand() / RAND_MAX;
+double Utility::Random() {
+    return (double) std::rand() / RAND_MAX;
 }
 
 
