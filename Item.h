@@ -23,6 +23,9 @@ enum class Item_type {Chestplate, Boots, Ring, Helmet, Ingredient, Sword, Bow, N
 
      [[nodiscard]] virtual bool Craftable() const;
 
+     [[nodiscard]] virtual bool Sellable() const;
+
+
      virtual void ShowRecipe(std::ostream &os) const;
 
      static const std::vector<Item *> &getItemList();
@@ -30,6 +33,8 @@ enum class Item_type {Chestplate, Boots, Ring, Helmet, Ingredient, Sword, Bow, N
      [[nodiscard]] static unsigned int getIdToPos(unsigned int id);
 
      friend std::ostream &operator<<(std::ostream &os, const Item &item);
+
+     const std::string &getName() const;
 
  protected:
      int id;

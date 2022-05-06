@@ -24,6 +24,10 @@ public:
 
     bool Craft(unsigned int ItemId);
 
+    [[nodiscard]] const std::vector<std::pair<int, int>> &getInventory() const;
+
+    bool Sell(unsigned int i, unsigned int count);
+
 private:
     int coins;
     int lvl;

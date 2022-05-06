@@ -9,6 +9,7 @@
 #include "Monster.h"
 #include "Exception.h"
 #include "Utility.h"
+#include "Ingredient.h"
 
 Game::Game(const std::string& dirr_name) : player("Alin", Stats(100,50,10,5,10), 0, 0, 0, 0, 0, 0, 1, 0, std::vector<std::pair<int,int> >())
 {
@@ -239,6 +240,49 @@ void Game::Craft() {
 }
 
 void Game::Sell() {
+    while(true)
+    {
+        std::cout << "Selling menu\n";
+        std::cout << "1. Exit\n";
+        for(auto item:player.getInventory())
+            if(Item::getItemList()[Item::getIdToPos(item.first)] -> Sellable()) {
+                auto ingredient = dynamic_cast<Ingredient*>(Item::getItemList()[Item::getIdToPos(item.first)]);
+                if(ingredient != nullptr)
+                {
+                    std::cout << item.first + 2 << ". ";
+                    std::cout << ingredient->getName() << " x" << item.second << " -"
+                              << ingredient->getSellingPrice()  << " gold per piece\n";
+                }
+                std::cout << "\n";
+            }
+        std::cout << "Enter your choice: ";
+        std::string choice_;
+        std::cin >> choice_;
+        unsigned int choice;
+        try
+        {
+            choice = std::stoi(choice_);
+        }
+        catch (std::runtime_error &err){
+            std::cout << "Invalid choice!\n";
+            continue;
+        }
+        if(choice == 1)
+            return;
+        if(choice < 2 || choice > Item::getItemList().size() + 1)
+        {
+            std::cout << "Invalid choice!\n";
+            continue;
+        }
+        if(!Item::getItemList()[Item::getIdToPos(choice - 2)]->Sellable())
+        {
+            std::cout << "You can't sell this item!\n";
+            continue;
+        }
+        player.Sell(choice - 2, 1);
+
+
+    }
 
 }
 

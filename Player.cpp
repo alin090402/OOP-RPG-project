@@ -9,6 +9,7 @@
 #include "Utility.h"
 #include "Item.h"
 #include "Equipment.h"
+#include "Ingredient.h"
 
 void Player::Loot(Monster* monster) {
     coins += monster -> getGoldGiven();
@@ -121,5 +122,35 @@ bool Player::Craft(const unsigned int ItemId) {
     }
     GetItem(ItemId, 1);
     return true;
+}
+
+const std::vector<std::pair<int, int>> &Player::getInventory() const {
+    return inventory;
+}
+
+bool Player::Sell(unsigned int id, unsigned int count) {
+    if(count == 0)
+        return false;
+    if(!Item::getItemList()[Item::getIdToPos(id)] -> Sellable())
+        return false;
+    for(auto &item: inventory)
+    {
+        if(item.first == (int) id)
+        {
+            if(item.second >= (int) count)
+            {
+                item.second -= (int)count;
+                coins += (int)count * ((Ingredient*)(Item::getItemList()[Item::getIdToPos(id)])) -> getSellingPrice();
+                return true;
+            }
+            else
+            {
+                coins += item.second * ((Ingredient*)(Item::getItemList()[Item::getIdToPos(id)])) -> getSellingPrice();
+                item.second = 0;
+                return true;
+            }
+        }
+    }
+    return false;
 }
 

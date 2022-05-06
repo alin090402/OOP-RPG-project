@@ -127,5 +127,13 @@ void Item::ShowRecipe(std::ostream &os) const{
     os << "No recipe for this item";
 }
 
+bool Item::Sellable() const {
+    return false;
+}
+
+const std::string &Item::getName() const {
+    return name;
+}
+
 
 Item::~Item() = default;

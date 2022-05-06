@@ -11,6 +11,7 @@ public:
     Ingredient(int id, const std::string &name, int sellingPrice);
 
     [[maybe_unused]][[nodiscard]] int getSellingPrice() const;
+    bool Sellable() const override;
 
     ~Ingredient() override;
 

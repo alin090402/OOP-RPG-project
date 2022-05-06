@@ -16,5 +16,9 @@ void Ingredient::Afisare(std::ostream &os) const{
     os << "Ingredient: name:" << name << " id:" << id << " selling_price:" << selling_price << std::endl;
 }
 
+bool Ingredient::Sellable() const {
+    return true;
+}
+
 Ingredient::~Ingredient() = default;
 
