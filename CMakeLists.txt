@@ -25,7 +25,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml when changing name here
-add_executable(${PROJECT_NAME} main.cpp Item.cpp Item.h Player.cpp Player.h Entity.cpp Entity.h Utility.cpp Utility.h Game.cpp Game.h Stats.cpp Stats.h Attack_type.h Ingredient.cpp Ingredient.h Equipment.cpp Equipment.h Weapon.cpp Weapon.h Sword.cpp Sword.h Bow.cpp Bow.h Monster.cpp Monster.h)
+add_executable(${PROJECT_NAME} main.cpp Item.cpp Item.h Player.cpp Player.h Entity.cpp Entity.h Utility.cpp Utility.h Game.cpp Game.h Stats.cpp Stats.h Attack_type.h Ingredient.cpp Ingredient.h Equipment.cpp Equipment.h Weapon.cpp Weapon.h Sword.cpp Sword.h Bow.cpp Bow.h Monster.cpp Monster.h Exception.cpp Exception.h)
 
 ###############################################################################
 

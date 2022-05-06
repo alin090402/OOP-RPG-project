@@ -19,12 +19,18 @@ Item::Item(int id, Item_type type, std::string name) : id(id), type(type), name(
 
 void Item::ItemInit(const std::string& file_name) {
     //TODO: de citit iteme din CSV si de creat vectorul de iteme;
+    std::cout << "alo1" << std::endl;
     std::vector<std::string> lines = Utility::ReadFile(file_name);
+
     std::vector<std::string> data;
-    for(auto& line : lines) {
+
+   for(auto& line : lines) {
         std::cout << line << std::endl;
-        data = Utility::CSVParser(line);
-        std::string &tip = data[0];
+
+       data = Utility::CSVParser(line);
+       if(data.size() < 4)
+           throw std::runtime_error("Not enough data in file under 4");
+       std::string &tip = data[0];
         int id = std::stoi(data[1]);
         std::string name = data[2];
 
@@ -36,6 +42,9 @@ void Item::ItemInit(const std::string& file_name) {
             Item::itemList.push_back(new Ingredient(id, name, sell_price));
             continue;
         }
+
+       if(data.size() < 10)
+           throw std::runtime_error("Not enough data in file under 10");
         Stats stats(std::stoi(data[3]), std::stoi(data[4]), std::stoi(data[5]), std::stoi(data[6]), std::stoi(data[7]));
         int price = std::stoi(data[8]);
         int required_level = std::stoi(data[9]);
@@ -66,7 +75,10 @@ void Item::ItemInit(const std::string& file_name) {
             Item::itemList.push_back(new Equipment(id, Item_type::Ring, name, stats, price, required_level, recipe));
             continue;
         }
-        int min_dmg = std::stoi(data[data.size() - 3]);
+       if(data.size() < 13)
+           throw std::runtime_error("Not enough data in file under 13");
+
+       int min_dmg = std::stoi(data[data.size() - 3]);
         int max_dmg = std::stoi(data[data.size() - 2]);
         int specialManaCost = std::stoi(data[data.size() - 1]);
         recipe.pop_back();

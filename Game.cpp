@@ -7,12 +7,32 @@
 #include "Item.h"
 #include "Player.h"
 #include "Monster.h"
+#include "Exception.h"
 
 Game::Game(const std::string& dirr_name) : player("Alin", Stats(100,50,10,5,10), 0, 0, 0, 0, 0, 0, 1, 0, std::vector<std::pair<int,int> >())
 {
-    Item::ItemInit(dirr_name + "/items.txt");
-    Monster::MonsterInit(dirr_name + "/monsters.txt");
-    player = Player(dirr_name + "/player.txt");
+    if(dirr_name.empty())
+        throw FileException("Directory name is empty");
+    try{
+        Item::ItemInit(dirr_name + "/items.txt");
+
+    }
+    catch (std::runtime_error& e){
+        throw FileException("Items file is corrupted, " + std::string(e.what()));
+    }
+    try{
+        Monster::MonsterInit(dirr_name + "/monsters.txt");
+
+    }
+    catch (std::runtime_error& e){
+        throw FileException("Monster file is corrupted");
+    }
+    try{
+        player = Player(dirr_name + "/player.txt");
+    }
+    catch (std::runtime_error& e){
+        throw FileException("Players file is corrupted");
+    }
 }
 
 void Game::MainMenu() {

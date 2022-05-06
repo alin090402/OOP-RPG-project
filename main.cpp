@@ -1,14 +1,17 @@
 #include <iostream>
-#include <fstream>
-#include <sstream>
 #include "Game.h"
-#include "Utility.h"
-#include "Item.h"
 #include "Monster.h"
+#include "Exception.h"
 
 int main() {
-    Game game("data");
-    game.MainMenu();
+    try{
+        Game game("data");
+        game.MainMenu();
+    }
+    catch (const FileException& e){
+        std::cerr << e.what() << std::endl;
+        return 1;
+    }
 
 
 

@@ -47,11 +47,9 @@ public:
 
     [[nodiscard]] const std::string &getName() const;
 
-    int getCurrentHp() const;
+    [[nodiscard]] int getCurrentHp() const;
 
-    int getWeapon() const;
-
-    int getCurrentMp() const;
+    [[nodiscard]] int getCurrentMp() const;
 
 
 };

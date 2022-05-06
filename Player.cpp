@@ -48,9 +48,13 @@ Player::Player(const std::string &name, const Stats &baseStats, int chestplate, 
           experience(experience), inventory(std::move(inventory)) {}
 
 Player::Player(const std::string &inputFile) {
-    try {
         std::vector<std::string> lines = Utility::ReadFile(inputFile);
+        if(lines.empty())
+            throw std::runtime_error("there is no player in file");
         std::vector<std::string> data = Utility::CSVParser(lines[0]);
+
+        if(data.size() < 14)
+            throw std::runtime_error("not enough data in player file");
 
         name = data[0];
         base_stats = Stats(std::stoi(data[1]), std::stoi(data[2]), std::stoi(data[3]),
@@ -67,15 +71,6 @@ Player::Player(const std::string &inputFile) {
         for(unsigned int i = 14; i < data.size(); i += 2) {
             inventory.emplace_back(std::stoi(data[i]), std::stod(data[i + 1]));
         }
-    }
-    catch(std::exception &e) {
-        std::cerr << "Obiectul Player nu a putut fi format" << e.what() << std::endl;
-    }
-
-
-
-
-
 
 }
 

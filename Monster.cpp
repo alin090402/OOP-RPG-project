@@ -34,7 +34,8 @@ void Monster::MonsterInit(const std::string &file_name) {
         if(line[0] == '#') continue;
         data = Utility::CSVParser(line);
         if(data.empty()) continue;
-
+        if(data.size() < 13)
+            throw std::runtime_error("Not enough data in monster file");
         std::string name = data[0];
         Stats stats = Stats(std::stoi(data[1]), std::stoi(data[2]), std::stoi(data[3]),
                             std::stoi(data[4]),std::stoi(data[5]));

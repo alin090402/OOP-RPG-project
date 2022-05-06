@@ -7,6 +7,7 @@
 #include "Weapon.h"
 #include "Utility.h"
 #include <utility>
+#include "Exception.h"
 
 Entity::Entity(std::string name, const Stats &baseStats, int chestplate, int boots, int ring, int helmet, int weapon)
         : name(std::move(name)), base_stats(baseStats), currentHP(baseStats.getHp()), currentMP(baseStats.getMana()),
@@ -53,11 +54,12 @@ Stats Entity::stats() const {
             if(p)
                 total_stats = total_stats + p->bonus_stats;
                 //TODO: adauga alte exceptie pentru cand pe poz respectiva nu este un Equipment
-            else throw(-1);
+            else throw DataException("Not an equipment");
         }
-        catch(int) {
-
-
+        catch(DataException& e)
+        {
+            std::cerr << e.what() << std::endl;
+            return base_stats;
         }
     }
     return total_stats;
@@ -84,10 +86,6 @@ const std::string &Entity::getName() const {
 
 int Entity::getCurrentHp() const {
     return currentHP;
-}
-
-int Entity::getWeapon() const {
-    return weapon;
 }
 
 void Entity::Heal() {
