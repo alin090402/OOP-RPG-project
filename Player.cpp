@@ -34,7 +34,7 @@ void Player::IncreaseExperience(int xp) {
 
 void Player::GetItem(int id, int count) {
     std:: cout << "got" << count << "x " << id << std::endl;
-    auto slot = std::find_if(inventory.begin(), inventory.end(), [&](std::pair<int,int> item) { return item.second == id;});
+    auto slot = std::find_if(inventory.begin(), inventory.end(), [&](std::pair<int,int> item) { return item.first == id;});
     if(slot != inventory.end())
     {
         slot -> second += count;
@@ -119,13 +119,12 @@ bool Player::Craft(const unsigned int ItemId) {
     }
     for(auto &ingredient : equipment -> getRecipe())
     {
-        for(auto &item: inventory)
+        auto slot = std::find_if(inventory.begin(), inventory.end(), [&](std::pair<int,int> item) { return item.first == ingredient.first;});
+        if(slot != inventory.end())
         {
-            if(item.first == ingredient.first)
-            {
-                item.second -= ingredient.second;
-                break;
-            }
+            slot -> second -= ingredient.second;
+            if(slot -> second == 0)
+                inventory.erase(slot);
         }
     }
     GetItem(ItemId, 1);
