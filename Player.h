@@ -22,6 +22,8 @@ public:
 
     friend std::ostream &operator<<(std::ostream &os, const Player &player);
 
+    bool Craft(unsigned int ItemId);
+
 private:
     int coins;
     int lvl;

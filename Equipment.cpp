@@ -38,5 +38,9 @@ void Equipment::ShowRecipe(std::ostream &os) const {
     }
 }
 
+int Equipment::getRequiredLvl() {
+    return 0;
+}
+
 
 

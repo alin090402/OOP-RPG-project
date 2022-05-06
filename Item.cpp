@@ -12,7 +12,7 @@
 #include "Bow.h"
 
 std::vector<Item*> Item::itemList;
-std::unordered_map<int, unsigned int> Item::id_to_pos;
+std::unordered_map<unsigned int, unsigned int> Item::id_to_pos;
 
 
 Item::Item(int id, Item_type type, std::string name) : id(id), type(type), name(std::move(name)) {}
@@ -93,8 +93,8 @@ const std::vector<Item *> &Item::getItemList() {
     return itemList;
 }
 
-const std::unordered_map<int,unsigned int> &Item::getIdToPos() {
-    return id_to_pos;
+unsigned int Item::getIdToPos(unsigned int id) {
+    return id_to_pos[id];
 }
 
 std::ostream &operator<<(std::ostream &os, const Item &item) {

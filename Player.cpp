@@ -7,6 +7,8 @@
 #include "Player.h"
 #include "Monster.h"
 #include "Utility.h"
+#include "Item.h"
+#include "Equipment.h"
 
 void Player::Loot(Monster* monster) {
     coins += monster -> getGoldGiven();
@@ -86,5 +88,43 @@ std::ostream &operator<<(std::ostream &os, const Player &player) {
         os << "\n" << item.first << " " << item.second;
 
     return os;
+}
+
+bool Player::Craft(const unsigned int ItemId) {
+    auto *equipment = dynamic_cast<Equipment*>(Item::getItemList()[Item::getIdToPos(ItemId)]);
+    if(equipment == nullptr)
+        return false;
+    if(equipment -> getRequiredLvl() > lvl)
+        return false;
+    for(auto &ingredient : equipment -> getRecipe())
+    {
+        bool found = false;
+        for(auto &item: inventory)
+        {
+            if(item.first == ingredient.first)
+            {
+                if(item.second >= ingredient.second)
+                {
+                    found = true;
+                    break;
+                }
+            }
+        }
+        if(!found)
+            return false;
+    }
+    for(auto &ingredient : equipment -> getRecipe())
+    {
+        for(auto &item: inventory)
+        {
+            if(item.first == ingredient.first)
+            {
+                item.second -= ingredient.second;
+                break;
+            }
+        }
+    }
+    GetItem(ItemId, 1);
+    return true;
 }
 

@@ -170,11 +170,49 @@ void Game::Load() {
 
 void Game::Craft() {
 
-    std::cout << "Crafting menu\n";
-    std::cout << "1. Exit\n";
-    for(unsigned int i = 0; i < Item::getItemList().size(); i++)
-        if(Item::getItemList()[i]->Craftable())
-            std::cout << i + 2 << ". " << Item::getItemList()[i]->ShowRecipe << "\n";
+    while(true)
+    {
+        std::cout << "Crafting menu\n";
+        std::cout << "1. Exit\n";
+
+        for(unsigned int i = 0; i < Item::getItemList().size(); i++)
+            if(Item::getItemList()[i]->Craftable()) {
+                std::cout << i + 2 << ". ";
+                Item::getItemList()[i]->ShowRecipe(std::cout);
+                std::cout << "\n";
+            }
+        std::cout << "Enter your choice: ";
+        std::string choice_;
+        std::cin >> choice_;
+        unsigned int choice;
+        try
+        {
+            choice = std::stoi(choice_);
+        }
+        catch (std::runtime_error &err){
+            std::cout << "Invalid choice!\n";
+            continue;
+        }
+        if(choice == 1)
+            return;
+        if(choice < 2 || choice > Item::getItemList().size() + 1)
+        {
+            std::cout << "Invalid choice!\n";
+            continue;
+        }
+        if(!Item::getItemList()[choice - 2]->Craftable())
+        {
+            std::cout << "You can't craft this item!\n";
+            continue;
+        }
+        if(!player.Craft(choice - 2))
+        {
+            std::cout << "You don't have enough materials!\n";
+            continue;
+        }
+
+
+    }
 
 }
 

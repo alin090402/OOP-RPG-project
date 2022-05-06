@@ -21,6 +21,8 @@ public:
     void ShowRecipe(std::ostream &os) const override;
 
 
+    int getRequiredLvl();
+
 protected:
     void Afisare(std::ostream &os)const override;
 

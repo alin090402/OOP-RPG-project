@@ -27,7 +27,7 @@ enum class Item_type {Chestplate, Boots, Ring, Helmet, Ingredient, Sword, Bow, N
 
      static const std::vector<Item *> &getItemList();
 
-     static const std::unordered_map<int, unsigned int> &getIdToPos();
+     [[nodiscard]] static unsigned int getIdToPos(unsigned int id);
 
      friend std::ostream &operator<<(std::ostream &os, const Item &item);
 
@@ -38,7 +38,7 @@ enum class Item_type {Chestplate, Boots, Ring, Helmet, Ingredient, Sword, Bow, N
      virtual void Afisare(std::ostream &os) const;
  private:
      static std::vector<Item*> itemList;
-     static std::unordered_map<int, unsigned int> id_to_pos;
+     static std::unordered_map<unsigned int, unsigned int> id_to_pos;
 
  };
 
