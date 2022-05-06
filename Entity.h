@@ -41,7 +41,7 @@ public:
     void Attack(Entity* enemy, Attack_type attackType);
     [[nodiscard]] Stats stats() const;
 
-    [[maybe_unused]] [[nodiscard]] bool isAlive() const;
+    [[nodiscard]] bool isAlive() const;
 
     friend std::ostream &operator<<(std::ostream &os, const Entity &entity);
 

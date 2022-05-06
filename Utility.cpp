@@ -51,9 +51,9 @@ int Utility::Random(const int min, const int max) {
 
 
 
-float Utility::pow(float base, int exp) {
+double Utility::pow(double base, int exp) {
     ///fast exponentiation
-    float result = 1;
+    double result = 1;
     while (exp) {
         if (exp & 1)
             result *= base;

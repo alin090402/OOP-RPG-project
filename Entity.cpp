@@ -14,7 +14,7 @@ Entity::Entity(std::string name, const Stats &baseStats, int chestplate, int boo
         chestplate(chestplate), boots(boots), ring(ring), helmet(helmet), weapon(weapon) {}
 
 void Entity::Attack(Entity *enemy, Attack_type attackType) {
-    std::pair<int, float> damage;
+    std::pair<int, double> damage;
     auto *pWeapon = dynamic_cast<Weapon *>( Item::getItemList()[this->weapon]);
     if(pWeapon != nullptr)
     {
@@ -33,7 +33,7 @@ void Entity::Attack(Entity *enemy, Attack_type attackType) {
                 damage =  pWeapon->SpecialAttack( *this);
                 break;
         }
-        if ((float) Utility::Random() < damage.second)
+        if (Utility::Random() < damage.second)
             enemy->currentHP -= std::max(damage.first - enemy->stats().getDef(), 0);
         std:: cout << name << " " << damage.first << " " << damage.second << std::endl;
     }
