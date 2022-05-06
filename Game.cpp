@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "Monster.h"
 #include "Exception.h"
+#include "Utility.h"
 
 Game::Game(const std::string& dirr_name) : player("Alin", Stats(100,50,10,5,10), 0, 0, 0, 0, 0, 0, 1, 0, std::vector<std::pair<int,int> >())
 {
@@ -33,6 +34,7 @@ Game::Game(const std::string& dirr_name) : player("Alin", Stats(100,50,10,5,10),
     catch (std::runtime_error& e){
         throw FileException("Players file is corrupted");
     }
+    Utility::Init();
 }
 
 void Game::MainMenu() {

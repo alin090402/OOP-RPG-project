@@ -33,10 +33,8 @@ void Entity::Attack(Entity *enemy, Attack_type attackType) {
                 damage =  pWeapon->SpecialAttack( *this);
                 break;
         }
-        if((float)Utility::Random() < damage.second)
-        {
-            enemy->currentHP -= damage.first;
-        }
+        if ((float) Utility::Random() < damage.second)
+            enemy->currentHP -= std::max(damage.first - enemy->stats().getDef(), 0);
         std:: cout << name << " " << damage.first << " " << damage.second << std::endl;
     }
     else {

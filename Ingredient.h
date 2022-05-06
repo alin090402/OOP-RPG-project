@@ -10,9 +10,9 @@ class Ingredient: public Item{
 public:
     Ingredient(int id, const std::string &name, int sellingPrice);
 
-    [[nodiscard]] int getSellingPrice() const;
+    [[maybe_unused]][[nodiscard]] int getSellingPrice() const;
 
-    virtual ~Ingredient();
+    ~Ingredient() override;
 
 private:
     int selling_price;
