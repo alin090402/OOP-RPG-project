@@ -34,13 +34,21 @@ void Player::IncreaseExperience(int xp) {
 
 void Player::GetItem(int id, int count) {
     std:: cout << "got" << count << "x " << id << std::endl;
-    for(auto &slot: inventory)
+    auto slot = std::find_if(inventory.begin(), inventory.end(), [&](std::pair<int,int> item) { return item.second == id;});
+    if(slot != inventory.end())
+    {
+        slot -> second += count;
+        return;
+    }
+    inventory.emplace_back(id, count);
+    /**for(auto &slot: inventory)
+
         if(slot.first == id)
         {
             slot.second += count;
             return;
-        }
-    inventory.emplace_back(id, count);
+        }*/
+
 }
 
 Player::Player(const std::string &name, const Stats &baseStats, int chestplate, int boots, int ring, int helmet,
@@ -140,12 +148,12 @@ bool Player::Sell(unsigned int id, unsigned int count) {
             if(item.second >= (int) count)
             {
                 item.second -= (int)count;
-                coins += (int)count * ((Ingredient*)(Item::getItemList()[Item::getIdToPos(id)])) -> getSellingPrice();
+                coins += (int)count * dynamic_cast<Ingredient*>(Item::getItemList()[Item::getIdToPos(id)]) -> getSellingPrice();
                 return true;
             }
             else
             {
-                coins += item.second * ((Ingredient*)(Item::getItemList()[Item::getIdToPos(id)])) -> getSellingPrice();
+                coins += item.second * dynamic_cast<Ingredient*>(Item::getItemList()[Item::getIdToPos(id)]) -> getSellingPrice();
                 item.second = 0;
                 return true;
             }
