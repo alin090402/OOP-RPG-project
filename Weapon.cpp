@@ -5,13 +5,15 @@
 #include "Weapon.h"
 
 Weapon::Weapon(int id, Item_type type, const std::string &name, const Stats &bonusStats, int price, int requiredLevel,
-               const std::vector<std::pair<int, int>> &recipe, int minDamage, int maxDamage) : Equipment(id, type, name,
+               const std::vector<std::pair<int, int>> &recipe, int minDamage, int maxDamage, int specialManaCost) :
+                                                                                                        Equipment(id, type, name,
                                                                                                          bonusStats,
                                                                                                          price,
                                                                                                          requiredLevel,
                                                                                                          recipe),
                                                                                                minDamage(minDamage),
-                                                                                               maxDamage(maxDamage) {}
+                                                                                               maxDamage(maxDamage),
+                                                                                               specialManaCost(specialManaCost){}
 
 void Weapon::Afisare(std::ostream &os) const{
     Equipment::Afisare(os);

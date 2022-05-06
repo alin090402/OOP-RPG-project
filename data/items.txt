@@ -1,3 +1,4 @@
+None,0,none,0,0,2,0,2,5,1,3,6,40
 Ingredient,1,leather,5
 Ingredient,2,cloth,3
 Ingredient,3,iron,20
@@ -16,5 +17,5 @@ Boots,15,basic_boots,10,0,0,0,0,5,1,1,3
 Boots,16,iron_boots,20,0,0,1,0,5,2,3,7
 Ring,17,basic_ring,10,0,0,0,0,5,1,1,3
 Ring,18,iron_ring,20,0,0,1,0,5,2,3,7
-Sword,19,basic_sword,0,0,2,0,2,5,1,7,2,5,10
-Bow,20,basic_bow,0,0,2,0,2,5,1,7,2,5,10
+Sword,19,basic_sword,0,0,2,0,2,5,1,7,2,5,10, 40
+Bow,20,basic_bow,0,0,2,0,2,5,1,7,2,5,10, 60

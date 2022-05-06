@@ -4,23 +4,44 @@
 
 #include "Entity.h"
 #include "Equipment.h"
+#include "Weapon.h"
+#include "Utility.h"
 #include <utility>
-//#include "Weapon.h"
 
 Entity::Entity(std::string name, const Stats &baseStats, int chestplate, int boots, int ring, int helmet, int weapon)
-        : name(std::move(name)), base_stats(baseStats), currentHP(baseStats.getHp()),
+        : name(std::move(name)), base_stats(baseStats), currentHP(baseStats.getHp()), currentMP(baseStats.getMana()),
         chestplate(chestplate), boots(boots), ring(ring), helmet(helmet), weapon(weapon) {}
 
 void Entity::Attack(Entity *enemy, Attack_type attackType) {
-    int damage;
-    damage = base_stats.getAtk();
-    if(attackType == Attack_type::Light_Attack)
+    std::pair<int, float> damage;
+    auto *pWeapon = dynamic_cast<Weapon *>( Item::getItemList()[this->weapon]);
+    if(pWeapon != nullptr)
     {
-        //damage = dynamic_cast<Weapon *> Item::Items[this->Weapon].LightAttack
+        switch (attackType)
+        {
+            case Attack_type::Light_Attack:
+                damage =  pWeapon->LightAttack( *this);
+                break;
+            case Attack_type::Medium_Attack:
+                damage =  pWeapon->MediumAttack( *this);
+                break;
+            case Attack_type::Heavy_Attack:
+                damage =  pWeapon->HeavyAttack( *this);
+                break;
+            case Attack_type::Special_Attack:
+                damage =  pWeapon->SpecialAttack( *this);
+                break;
+        }
+        if(Utility::Random() < damage.second)
+        {
+            enemy->currentHP -= damage.first;
+        }
+        std:: cout << name << " " << damage.first << " " << damage.second << std::endl;
     }
-    //TODO: implementarea tipurilor de atacuri si a sansei de reusita
+    else {
+        std::cout << "No weapon equipped" << std::endl;
+    }
 
-    enemy->currentHP -= damage;
 }
 
 Stats Entity::stats() const {
@@ -71,6 +92,15 @@ int Entity::getWeapon() const {
 
 void Entity::Heal() {
     currentHP = base_stats.getHp();
+    currentMP = base_stats.getMana();
+}
+
+int Entity::getCurrentMp() const {
+    return currentMP;
+}
+
+void Entity::UseMana(int mana) {
+    currentMP -= mana;
 }
 
 Entity::Entity() = default;

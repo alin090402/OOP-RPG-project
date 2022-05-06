@@ -40,7 +40,7 @@ void Item::ItemInit(const std::string& file_name) {
         int price = std::stoi(data[8]);
         int required_level = std::stoi(data[9]);
         std::vector<std::pair<int, int>> recipe;
-        for (unsigned int i = 10; i < data.size(); i += 2) {
+        for (unsigned int i = 10; i < data.size() - 1; i += 2) {
             int id_ = std::stoi(data[i]);
             int quantity = std::stoi(data[i + 1]);
             recipe.emplace_back(id_, quantity);
@@ -66,22 +66,23 @@ void Item::ItemInit(const std::string& file_name) {
             Item::itemList.push_back(new Equipment(id, Item_type::Ring, name, stats, price, required_level, recipe));
             continue;
         }
-        int min_dmg = std::stoi(data[data.size() - 2]);
-        int max_dmg = std::stoi(data[data.size() - 1]);
+        int min_dmg = std::stoi(data[data.size() - 3]);
+        int max_dmg = std::stoi(data[data.size() - 2]);
+        int specialManaCost = std::stoi(data[data.size() - 1]);
         recipe.pop_back();
         if(data[0] == "Sword")
         {
-            Item::itemList.push_back(new Sword(id, Item_type::Sword, name, stats, price, required_level, recipe, min_dmg, max_dmg));
+            Item::itemList.push_back(new Sword(id, Item_type::Sword, name, stats, price, required_level, recipe, min_dmg, max_dmg, specialManaCost));
             continue;
         }
         if(data[0] == "Bow")
         {
-            Item::itemList.push_back(new Bow(id, Item_type::Bow, name, stats, price, required_level, recipe, min_dmg, max_dmg));
+            Item::itemList.push_back(new Bow(id, Item_type::Bow, name, stats, price, required_level, recipe, min_dmg, max_dmg, specialManaCost));
             continue;
         }
         if(data[0] == "None")
         {
-            Item::itemList.push_back(new Sword(id, Item_type::None, name, stats, price, required_level, recipe, min_dmg, max_dmg));
+            Item::itemList.push_back(new Sword(id, Item_type::None, name, stats, price, required_level, recipe, min_dmg, max_dmg, specialManaCost));
             continue;
         }
 

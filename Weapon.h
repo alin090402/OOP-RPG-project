@@ -11,17 +11,18 @@ class Weapon: public Equipment{
 
 public:
     Weapon(int id, Item_type type, const std::string &name, const Stats &bonusStats, int price, int requiredLevel,
-           const std::vector<std::pair<int, int>> &recipe, int minDamage, int maxDamage);
+           const std::vector<std::pair<int, int>> &recipe, int minDamage, int maxDamage, int specialManaCost);
 
 protected:
     void Afisare(std::ostream &os) const override;
     int minDamage;
     int maxDamage;
-private:
-    virtual std::pair<int,float> LightAttack() = 0; // returns the damage and the hit change
-    virtual std::pair<int,float> MediumAttack() = 0;
-    virtual std::pair<int,float> HeavyAttack() = 0;
-    virtual std::pair<int,float> SpecialAttack() = 0;
+    int specialManaCost;
+public:
+    virtual std::pair<int,float> LightAttack(Entity &entity) = 0; // returns the damage and the hit change
+    virtual std::pair<int,float> MediumAttack(Entity &entity) = 0;
+    virtual std::pair<int,float> HeavyAttack(Entity &entity) = 0;
+    virtual std::pair<int,float> SpecialAttack(Entity &entity) = 0;
 };
 
 

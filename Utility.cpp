@@ -45,3 +45,26 @@ std::vector<std::string> Utility::ReadFile(const std::string &fileName) {
     return lines;
 }
 
+int Utility::Random(const int min, const int max) {
+    return std::rand() % (max - min + 1) + min;
+}
+
+
+
+float Utility::pow(float base, int exp) {
+    ///fast exponentiation
+    float result = 1;
+    while (exp) {
+        if (exp & 1)
+            result *= base;
+        exp >>= 1;
+        base *= base;
+    }
+    return result;
+}
+
+float Utility::Random() {
+    return (float) std::rand() / RAND_MAX;
+}
+
+

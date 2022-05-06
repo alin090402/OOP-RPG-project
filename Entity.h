@@ -18,6 +18,7 @@ protected:
     std::string name;
     Stats base_stats;
     int currentHP;
+    int currentMP;
 private:
     [[nodiscard]] std::vector<int> equipments() const;
 
@@ -34,6 +35,9 @@ public:
     Entity();
 
     void Heal();
+
+    void UseMana(int mana);
+
     void Attack(Entity* enemy, Attack_type attackType);
     [[nodiscard]] Stats stats() const;
 
@@ -46,6 +50,8 @@ public:
     int getCurrentHp() const;
 
     int getWeapon() const;
+
+    int getCurrentMp() const;
 
 
 };
