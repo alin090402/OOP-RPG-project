@@ -16,18 +16,18 @@ class Entity {
 
 protected:
     std::string name;
-    Stats base_stats;
-    int currentHP;
-    int currentMP;
+    Stats base_stats = Stats(0, 0, 0, 0, 0);
+    int currentHP{};
+    int currentMP{};
 private:
     [[nodiscard]] std::vector<int> equipments() const;
 
 protected:
-    int chestplate;
-    int boots;
-    int ring;
-    int helmet;
-    int weapon;
+    int chestplate{};
+    int boots{};
+    int ring{};
+    int helmet{};
+    int weapon{};
 
 public:
     Entity(std::string name, const Stats &baseStats, int chestplate, int boots, int ring, int helmet, int weapon);
