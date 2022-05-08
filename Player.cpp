@@ -127,7 +127,7 @@ bool Player::Craft(const unsigned int ItemId) {
                 inventory.erase(slot);
         }
     }
-    GetItem(ItemId, 1);
+    GetItem((int)ItemId, 1);
     return true;
 }
 
@@ -160,4 +160,6 @@ bool Player::Sell(unsigned int id, unsigned int count) {
     }
     return false;
 }
+
+Player::Player() = default;
 

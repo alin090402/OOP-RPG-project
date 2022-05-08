@@ -16,6 +16,8 @@ public:
            int coins, int lvl, int experience, std::vector<std::pair<int, int>> inventory);
     explicit Player(const std::string &inputFile);
 
+    Player();
+
     void Loot(Monster* monster);
     void IncreaseExperience(int xp);
     void GetItem(int id, int count);
@@ -29,9 +31,9 @@ public:
     bool Sell(unsigned int i, unsigned int count);
 
 private:
-    int coins;
-    int lvl;
-    int experience;
+    int coins = 0;
+    int lvl = 1;
+    int experience = 0;
     std::vector<std::pair<int,int> > inventory;
 
 

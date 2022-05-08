@@ -4,8 +4,9 @@
 #include "Exception.h"
 
 int main() {
+    Game game;
     try{
-        Game game("data");
+        game = Game("data");
         game.MainMenu();
     }
     catch (const FileException& e){

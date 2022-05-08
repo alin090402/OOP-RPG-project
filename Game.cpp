@@ -11,7 +11,7 @@
 #include "Utility.h"
 #include "Ingredient.h"
 
-Game::Game(const std::string& dirr_name) : player("Alin", Stats(100,50,10,5,10), 0, 0, 0, 0, 0, 0, 1, 0, std::vector<std::pair<int,int> >())
+Game::Game(const std::string& dirr_name)
 {
     if(dirr_name.empty())
         throw FileException("Directory name is empty");
@@ -293,4 +293,6 @@ Game::~Game() {
 
 
 }
+
+Game::Game() = default;
 

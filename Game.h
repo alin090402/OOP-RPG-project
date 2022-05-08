@@ -10,6 +10,8 @@
 
 class Game {
 public:
+    Game();
+
     explicit Game(const std::string& dirr_name);
     void MainMenu();
 
