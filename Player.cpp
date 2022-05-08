@@ -51,7 +51,7 @@ void Player::GetItem(int id, int count) {
 
 }
 
-Player::Player(const std::string &name, const Stats &baseStats, int chestplate, int boots, int ring, int helmet,
+[[maybe_unused]]Player::Player(const std::string &name, const Stats &baseStats, int chestplate, int boots, int ring, int helmet,
                int weapon, int coins, int lvl, int experience, std::vector<std::pair<int, int>> inventory)
         : Entity(name, baseStats, chestplate, boots, ring, helmet, weapon), coins(coins), lvl(lvl),
           experience(experience), inventory(std::move(inventory)) {}

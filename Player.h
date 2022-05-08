@@ -12,7 +12,7 @@ class Item;
 class Monster;
 class Player: public Entity {
 public:
-    Player(const std::string &name, const Stats &baseStats, int chestplate, int boots, int ring, int helmet, int weapon,
+    [[maybe_unused]] Player(const std::string &name, const Stats &baseStats, int chestplate, int boots, int ring, int helmet, int weapon,
            int coins, int lvl, int experience, std::vector<std::pair<int, int>> inventory);
     explicit Player(const std::string &inputFile);
 
