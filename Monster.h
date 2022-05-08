@@ -27,6 +27,8 @@ public:
 
     [[nodiscard]] const std::vector<std::pair<int, double>> &getLoot() const;
 
+    static void reset();
+
 private:
     int xpGiven;
     int goldGiven;

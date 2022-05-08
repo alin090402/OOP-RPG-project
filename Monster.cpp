@@ -76,3 +76,7 @@ int Monster::getGoldGiven() const {
 const std::vector<std::pair<int, double>> &Monster::getLoot() const {
     return loot;
 }
+
+void Monster::reset() {
+    monsterList.clear();
+}

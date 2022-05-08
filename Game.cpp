@@ -289,9 +289,8 @@ void Game::Sell() {
 Game::~Game() {
     for(auto item : Item::getItemList())
         delete item;
-
-
-
+    Item::reset();
+    Monster::reset();
 }
 
 Game::Game() = default;

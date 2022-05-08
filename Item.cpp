@@ -135,5 +135,10 @@ const std::string &Item::getName() const {
     return name;
 }
 
+void Item::reset() {
+    id_to_pos.clear();
+    itemList.clear();
+}
+
 
 Item::~Item() = default;

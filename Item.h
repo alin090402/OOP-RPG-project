@@ -36,6 +36,8 @@ enum class Item_type {Chestplate, Boots, Ring, Helmet, Ingredient, Sword, Bow, N
 
      const std::string &getName() const;
 
+     static void reset();
+
  protected:
      int id;
      Item_type type;
