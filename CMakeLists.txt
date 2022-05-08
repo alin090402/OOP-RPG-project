@@ -25,22 +25,21 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml when changing name here
-add_executable(${PROJECT_NAME} main.cpp  Enemy.cpp Enemy.h Item.cpp Item.h Player.cpp Player.h Entity.cpp Entity.h Utility.cpp Utility.h EnemyFactory.cpp EnemyFactory.h Game.cpp Game.h)
+add_executable(${PROJECT_NAME} main.cpp Item.cpp Item.h Player.cpp Player.h Entity.cpp Entity.h Utility.cpp Utility.h Game.cpp Game.h Stats.cpp Stats.h Attack_type.h Ingredient.cpp Ingredient.h Equipment.cpp Equipment.h Weapon.cpp Weapon.h Sword.cpp Sword.h Bow.cpp Bow.h Monster.cpp Monster.h Exception.h)
 
 ###############################################################################
 
 # custom compiler flags
 message("Compiler: ${CMAKE_CXX_COMPILER_ID} version ${CMAKE_CXX_COMPILER_VERSION}")
 if(MSVC)
-    target_compile_options(${PROJECT_NAME} PRIVATE /W4 /WX /permissive-)
+    target_compile_options(${PROJECT_NAME} PRIVATE /W4 /WX /permissive- /wd4244 /wd4267 /wd4101)
 else()
     target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic -Werror)
 
     if("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
-    elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-        target_compile_options(${PROJECT_NAME} PRIVATE -stdlib=libstdc++)
-    elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
+    elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
         target_compile_options(${PROJECT_NAME} PRIVATE -stdlib=libc++)
+        target_link_options(${PROJECT_NAME} PRIVATE -stdlib=libc++)
     endif()
 endif()
 
@@ -58,14 +57,14 @@ elseif(UNIX)
     if("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
         # we cannot mix sanitizers with Valgrind
     elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
-        if("${CMAKE_CXX_COMPILER_VERSION}" MATCHES "10.")
+        if("${CMAKE_CXX_COMPILER_VERSION}" MATCHES "12.")
             # check leaks on Linux since macOS does not support the leaks sanitizer yet
             # leaks sanitizer is enabled by default on Linux, so we do not need to enable it explicitly
             target_compile_options(${PROJECT_NAME} PRIVATE -fsanitize=address,undefined)
             target_link_options(${PROJECT_NAME} PRIVATE -fsanitize=address,undefined)
         else()
-            target_compile_options(${PROJECT_NAME} PRIVATE -fsanitize=memory,undefined)
-            target_link_options(${PROJECT_NAME} PRIVATE -fsanitize=memory,undefined)
+            target_compile_options(${PROJECT_NAME} PRIVATE -fsanitize=memory,undefined -fsanitize-memory-track-origins)
+            target_link_options(${PROJECT_NAME} PRIVATE -fsanitize=memory,undefined -fsanitize-memory-track-origins -Wl,-rpath,tools/llvm-project/build/lib)
         endif()
     endif()
 endif()
@@ -81,5 +80,5 @@ endif()
 
 # copy binaries to bin folder; these are uploaded as artifacts on each release
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-# install(DIRECTORY some_dir1 some_dir2 DESTINATION bin)
+install(DIRECTORY data/ DESTINATION bin)
 # install(FILES some_file1.txt some_file2.md DESTINATION bin)

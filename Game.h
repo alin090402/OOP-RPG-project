@@ -7,21 +7,32 @@
 
 
 #include "Player.h"
-#include "EnemyFactory.h"
 
 class Game {
-    static Player player;
-
 public:
-    static void Init();
+    Game();
 
+    explicit Game(const std::string& dirr_name);
+    void MainMenu();
+
+    virtual ~Game();
 
 private:
-    static void Menu();
-    static void Fight(Enemy* &enemy);
-    static void Choose_Enemy();
+
+    Player player;
+    void Fight(Monster monster);
+    void FightMenu();
+
+    void ShopMenu();
+
+    void Save();
+
+    void Load();
+
+    void Craft();
+
+    void Sell();
 
 };
-
 
 #endif //RPG_GAME_H

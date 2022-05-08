@@ -7,22 +7,51 @@
 
 
 #include <ostream>
+#include <vector>
+#include "Stats.h"
+#include "Attack_type.h"
 
 class Entity {
+
+
+protected:
+    std::string name;
+    Stats base_stats = Stats(0, 0, 0, 0, 0);
+    int currentHP{};
+    int currentMP{};
+private:
+    [[nodiscard]] std::vector<int> equipments() const;
+
+protected:
+    int chestplate{};
+    int boots{};
+    int ring{};
+    int helmet{};
+    int weapon{};
+
 public:
-    Entity(int hp, int mana, int atk, int dex, int def);
+    Entity(std::string name, const Stats &baseStats, int chestplate, int boots, int ring, int helmet, int weapon);
+
     Entity();
-    Entity(const Entity& other);
-    Entity& operator=(const Entity& other);
+
+    void Heal();
+
+    void UseMana(int mana);
+
+    void Attack(Entity* enemy, Attack_type attackType);
+    [[nodiscard]] Stats stats() const;
+
+    [[nodiscard]] bool isAlive() const;
 
     friend std::ostream &operator<<(std::ostream &os, const Entity &entity);
 
-protected:
-    int hp;
-    int mana;
-    int atk;
-    int dex;
-    int def;
+    [[nodiscard]] const std::string &getName() const;
+
+    [[nodiscard]] int getCurrentHp() const;
+
+    [[nodiscard]] int getCurrentMp() const;
+
+
 };
 
 
