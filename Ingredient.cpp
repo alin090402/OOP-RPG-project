@@ -20,5 +20,9 @@ bool Ingredient::Sellable() const {
     return true;
 }
 
+std::shared_ptr<Item> Ingredient::clone() const {
+    return std::make_shared<Ingredient>(*this);
+}
+
 Ingredient::~Ingredient() = default;
 

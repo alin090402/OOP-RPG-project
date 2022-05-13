@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <memory>
 #include "Game.h"
 #include "Item.h"
 #include "Player.h"
@@ -30,9 +31,10 @@ Game::Game(const std::string& dirr_name)
         throw FileException("Monster file is corrupted");
     }
     try{
-        player = Player(dirr_name + "/player.txt");
+        player = std::make_shared<Player>(Player(dirr_name + "/player.txt"));
     }
     catch (std::runtime_error& e){
+        std::cerr << e.what() << std::endl;
         throw FileException("Players file is corrupted");
     }
     Utility::Init();
@@ -44,31 +46,40 @@ void Game::MainMenu() {
     {
         std::cout << player << "\n";
         std::cout << "Welcome to the game!\n";
-        std::cout << "1. Fight\n";
-        std::cout << "2. Shop\n";
-        std::cout << "3. Save\n";
-        std::cout << "4. Load\n";
-        std::cout << "5. Exit\n";
+        std::cout << "1. Exit\n";
+        std::cout << "2. Fight\n";
+        std::cout << "3. Shop\n";
+        //std::cout << "3. Save\n";
+        //std::cout << "4. Load\n";
         std::cout << "Enter your choice: ";
+        std::string choice_;
+        std::cin >> choice_;
         int choice;
-        std::cin >> choice;
+        try{
+            choice = std::stoi(choice_);
+        }
+        catch (std::invalid_argument& e){
+            choice = 0;
+        }
+
         switch (choice) {
             case 1:
-                FightMenu();
-                break;
-            case 2:
-                ShopMenu();
-                break;
-            case 3:
-                Save();
-                break;
-            case 4:
-                Load();
-                break;
-            case 5:
                 std::cout << "Goodbye!\n";
                 end = true;
                 break;
+            case 2:
+                FightMenu();
+                break;
+            case 3:
+                ShopMenu();
+                break;
+            case 4:
+                Save();
+                break;
+            case 5:
+                Load();
+                break;
+
             default:
                 std::cout << "Invalid choice!\n";
                 break;
@@ -91,7 +102,8 @@ void Game::FightMenu() {
             break;
         }
         else if(choice >= 2 && choice <= Monster::getMonsterList().size()+1) {
-            Fight(Monster::getMonsterList()[choice-2]);
+            auto enemy = Monster::getMonsterList()[choice-2].clone();
+            Fight(enemy);
         }
         else {
             std::cout << "Invalid choice!\n";
@@ -102,13 +114,13 @@ void Game::FightMenu() {
 
 }
 
-void Game::Fight(Monster monster) {
-    std::cout << "You are fighting " << monster.getName() << "\n";
-    player.Heal();
-    monster.Heal();
-    while(player.isAlive() && monster.isAlive())
+void Game::Fight(const std::shared_ptr<Entity>& monster) {
+    std::cout << "You are fighting " << monster->getName() << "\n";
+    player->Heal();
+    monster->Heal();
+    while(player->isAlive() && monster->isAlive())
     {
-        std::cout << "your hp: " << player.getCurrentHp() << "     enemy hp: " << monster.getCurrentHp() << "\n";
+        std::cout << "your hp: " << player->getCurrentHp() << "     enemy hp: " << monster->getCurrentHp() << "\n";
         std::cout << "1.Light Attack\n";
         std::cout << "2.Medium Attack\n";
         std::cout << "3.Heavy Attack\n";
@@ -119,26 +131,27 @@ void Game::Fight(Monster monster) {
         switch (choice)
         {
             case 1:
-                player.Attack(&monster, Attack_type::Light_Attack);
+                player->Attack(monster, Attack_type::Light_Attack);
                 break;
             case 2:
-                player.Attack(&monster, Attack_type::Medium_Attack);
+                player->Attack(monster, Attack_type::Medium_Attack);
                 break;
             case 3:
-                player.Attack(&monster, Attack_type::Heavy_Attack);
+                player->Attack(monster, Attack_type::Heavy_Attack);
                 break;
             case 4:
-                player.Attack(&monster, Attack_type::Special_Attack);
+                player->Attack(monster, Attack_type::Special_Attack);
                 break;
             default:
                 std::cout << "Invalid choice!\n";
                 continue;
         }
-        if(monster.isAlive())
-            monster.Attack(&player, Attack_type::Medium_Attack);
+        if(monster->isAlive())
+            monster->Attack(player, Attack_type::Medium_Attack);
     }
-    if(player.isAlive())
-        player.Loot(&monster);
+
+    if(player->isAlive())
+        player->Loot(std::dynamic_pointer_cast<Monster>(monster));
     else
         std::cout << "You died!\n";
 }
@@ -228,7 +241,7 @@ void Game::Craft() {
             std::cout << "You can't craft this item!\n";
             continue;
         }
-        if(!player.Craft(choice - 2))
+        if(!player->Craft(choice - 2))
         {
             std::cout << "You don't have enough materials!\n";
             continue;
@@ -244,7 +257,7 @@ void Game::Sell() {
     {
         std::cout << "Selling menu\n";
         std::cout << "1. Exit\n";
-        for(auto item:player.getInventory())
+        for(auto item:player->getInventory())
             if(Item::getItemList()[Item::getIdToPos(item.first)] -> Sellable()) {
                 auto ingredient = dynamic_cast<Ingredient*>(Item::getItemList()[Item::getIdToPos(item.first)]);
                 if(ingredient != nullptr)
@@ -279,7 +292,7 @@ void Game::Sell() {
             std::cout << "You can't sell this item!\n";
             continue;
         }
-        player.Sell(choice - 2, 1);
+        player->Sell(choice - 2, 1);
 
 
     }

@@ -10,8 +10,10 @@ class Ingredient: public Item{
 public:
     Ingredient(int id, const std::string &name, int sellingPrice);
 
+    [[nodiscard]] std::shared_ptr<Item> clone() const override;
+
     [[maybe_unused]][[nodiscard]] int getSellingPrice() const;
-    bool Sellable() const override;
+    [[nodiscard]] bool Sellable() const override;
 
     ~Ingredient() override;
 

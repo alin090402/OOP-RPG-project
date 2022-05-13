@@ -13,6 +13,8 @@ public:
     Equipment(int id, Item_type type, const std::string &name, const Stats &bonusStats, int price, int requiredLevel,
               std::vector<std::pair<int, int>> recipe);
 
+    [[nodiscard]] std::shared_ptr<Item> clone() const override;
+
     [[nodiscard]] const std::vector<std::pair<int, int>> &getRecipe() const;
     friend Stats Entity::stats() const;
 

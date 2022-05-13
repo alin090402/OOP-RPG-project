@@ -10,6 +10,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <memory>
 
 enum class Item_type {Chestplate, Boots, Ring, Helmet, Ingredient, Sword, Bow, None};
 
@@ -17,7 +18,10 @@ enum class Item_type {Chestplate, Boots, Ring, Helmet, Ingredient, Sword, Bow, N
  public:
      Item(int id, Item_type type, std::string name);
 
+
      static void ItemInit(const std::string& file_name);
+
+     [[nodiscard]]virtual std::shared_ptr<Item> clone() const = 0;
 
      virtual ~Item();
 
@@ -34,7 +38,7 @@ enum class Item_type {Chestplate, Boots, Ring, Helmet, Ingredient, Sword, Bow, N
 
      friend std::ostream &operator<<(std::ostream &os, const Item &item);
 
-     const std::string &getName() const;
+     [[nodiscard]] const std::string &getName() const;
 
      static void reset();
 

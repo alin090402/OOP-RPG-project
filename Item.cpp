@@ -18,7 +18,6 @@ std::unordered_map<unsigned int, unsigned int> Item::id_to_pos;
 Item::Item(int id, Item_type type, std::string name) : id(id), type(type), name(std::move(name)) {}
 
 void Item::ItemInit(const std::string& file_name) {
-    //TODO: de citit iteme din CSV si de creat vectorul de iteme;
     std::cout << "alo1" << std::endl;
     std::vector<std::string> lines = Utility::ReadFile(file_name);
 

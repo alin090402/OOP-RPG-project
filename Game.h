@@ -19,8 +19,8 @@ public:
 
 private:
 
-    Player player;
-    void Fight(Monster monster);
+    std::shared_ptr<Player> player;
+    void Fight(const std::shared_ptr<Entity>& monster);
     void FightMenu();
 
     void ShopMenu();

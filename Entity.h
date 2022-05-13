@@ -8,10 +8,11 @@
 
 #include <ostream>
 #include <vector>
+#include <memory>
 #include "Stats.h"
 #include "Attack_type.h"
 
-class Entity {
+class Entity : public std::enable_shared_from_this<Entity>{
 
 
 protected:
@@ -34,11 +35,13 @@ public:
 
     Entity();
 
+    [[nodiscard]]virtual std::shared_ptr<Entity> clone() const = 0;
+
     void Heal();
 
     void UseMana(int mana);
 
-    void Attack(Entity* enemy, Attack_type attackType);
+    void Attack(const std::shared_ptr<Entity>& enemy, Attack_type attackType);
     [[nodiscard]] Stats stats() const;
 
     [[nodiscard]] bool isAlive() const;

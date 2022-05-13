@@ -18,7 +18,7 @@ public:
 
     Player();
 
-    void Loot(Monster* monster);
+    void Loot(std::shared_ptr<Monster> monster);
     void IncreaseExperience(int xp);
     void GetItem(int id, int count);
 
@@ -29,6 +29,8 @@ public:
     [[nodiscard]] const std::vector<std::pair<int, int>> &getInventory() const;
 
     bool Sell(unsigned int i, unsigned int count);
+
+    [[nodiscard]] std::shared_ptr<Entity> clone()const override;
 
 private:
     int coins = 0;

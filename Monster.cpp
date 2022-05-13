@@ -80,3 +80,9 @@ const std::vector<std::pair<int, double>> &Monster::getLoot() const {
 void Monster::reset() {
     monsterList.clear();
 }
+
+std::shared_ptr<Entity> Monster::clone() const {
+    return std::make_shared<Monster>(*this);
+}
+
+Monster::~Monster() = default;

@@ -42,6 +42,10 @@ int Equipment::getRequiredLvl() {
     return 0;
 }
 
+std::shared_ptr<Item> Equipment::clone() const {
+    return std::make_shared<Equipment>(*this);
+}
+
 Equipment::~Equipment() = default;
 
 

@@ -29,6 +29,10 @@ public:
 
     static void reset();
 
+    std::shared_ptr<Entity> clone() const override;
+
+    virtual ~Monster();
+
 private:
     int xpGiven;
     int goldGiven;

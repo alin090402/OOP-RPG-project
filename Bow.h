@@ -13,11 +13,13 @@ public:
 
     ~Bow() override;
 
+    [[nodiscard]] std::shared_ptr<Item> clone()const override;
+
 private:
-    std::pair<int, double> LightAttack(Entity &entity) override;
-    std::pair<int, double> MediumAttack(Entity &entity) override;
-    std::pair<int, double> HeavyAttack(Entity &entity) override;
-    std::pair<int, double> SpecialAttack(Entity &entity) override;
+    std::pair<int, double> LightAttack(std::shared_ptr<Entity> entity) override;
+    std::pair<int, double> MediumAttack(std::shared_ptr<Entity> entity) override;
+    std::pair<int, double> HeavyAttack(std::shared_ptr<Entity> entity) override;
+    std::pair<int, double> SpecialAttack(std::shared_ptr<Entity> entity) override;
 
 };
 

@@ -13,7 +13,7 @@ Entity::Entity(std::string name, const Stats &baseStats, int chestplate, int boo
         : name(std::move(name)), base_stats(baseStats), currentHP(baseStats.getHp()), currentMP(baseStats.getMana()),
         chestplate(chestplate), boots(boots), ring(ring), helmet(helmet), weapon(weapon) {}
 
-void Entity::Attack(Entity *enemy, Attack_type attackType) {
+void Entity::Attack(const std::shared_ptr<Entity>& enemy, Attack_type attackType) {
     std::pair<int, double> damage;
     auto *pWeapon = dynamic_cast<Weapon *>( Item::getItemList()[this->weapon]);
     if(pWeapon != nullptr)
@@ -21,16 +21,16 @@ void Entity::Attack(Entity *enemy, Attack_type attackType) {
         switch (attackType)
         {
             case Attack_type::Light_Attack:
-                damage =  pWeapon->LightAttack( *this);
+                damage =  pWeapon->LightAttack( shared_from_this());
                 break;
             case Attack_type::Medium_Attack:
-                damage =  pWeapon->MediumAttack( *this);
+                damage =  pWeapon->MediumAttack( shared_from_this());
                 break;
             case Attack_type::Heavy_Attack:
-                damage =  pWeapon->HeavyAttack( *this);
+                damage =  pWeapon->HeavyAttack( shared_from_this());
                 break;
             case Attack_type::Special_Attack:
-                damage =  pWeapon->SpecialAttack( *this);
+                damage =  pWeapon->SpecialAttack( shared_from_this());
                 break;
         }
         if (Utility::Random() < damage.second)
@@ -51,7 +51,6 @@ Stats Entity::stats() const {
             auto* p = dynamic_cast< Equipment* > (Item::getItemList()[equipment]);
             if(p)
                 total_stats = total_stats + p->bonus_stats;
-                //TODO: adauga alte exceptie pentru cand pe poz respectiva nu este un Equipment
             else throw DataException("Not an equipment");
         }
         catch(DataException& e)
