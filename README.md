@@ -29,14 +29,14 @@
   - [x] apelarea constructorului din clasa de bază 
   - [x] smart pointers
   - [x] `dynamic_cast`
-- [ ] suprascris cc/op= pentru copieri/atribuiri corecte, copy and swap
+- [x] suprascris cc/op= pentru copieri/atribuiri corecte, copy and swap
 - [x] excepții
   - [x] ierarhie proprie (cu baza `std::exception` sau derivată din `std::exception`)
   - [x] utilizare cu sens: de exemplu, `throw` în constructor, `try`/`catch` în `main`
 - [x] funcții și atribute `static`
 - [x] STL
 - [x] cât mai multe `const`
-- [ ] tag de `git`: de exemplu `v0.2`
+- [x] tag de `git`: de exemplu `v0.2`
 
 ## Tema 3
 
