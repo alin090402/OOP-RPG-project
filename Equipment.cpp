@@ -38,8 +38,8 @@ void Equipment::ShowRecipe(std::ostream &os) const {
     }
 }
 
-int Equipment::getRequiredLvl() {
-    return 0;
+int Equipment::getRequiredLvl() const {
+    return requiredLevel;
 }
 
 std::shared_ptr<Item> Equipment::clone() const {

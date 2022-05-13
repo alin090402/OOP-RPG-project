@@ -11,7 +11,7 @@
 #include "Equipment.h"
 #include "Ingredient.h"
 
-void Player::Loot(std::shared_ptr<Monster> monster) {
+void Player::Loot(const std::shared_ptr<Monster>& monster) {
     coins += monster -> getGoldGiven();
     IncreaseExperience(monster->getXpGiven());
     auto random = Utility::Random((unsigned int)monster->getLoot().size());
@@ -164,6 +164,8 @@ bool Player::Sell(unsigned int id, unsigned int count) {
 std::shared_ptr<Entity> Player::clone() const {
     return std::make_shared<Player>(*this);
 }
+
+Player::~Player()  = default;
 
 Player::Player() = default;
 

@@ -44,7 +44,6 @@ void Game::MainMenu() {
     bool end = false;
     while(!end)
     {
-        std::cout << player << "\n";
         std::cout << "Welcome to the game!\n";
         std::cout << "1. Exit\n";
         std::cout << "2. Fight\n";

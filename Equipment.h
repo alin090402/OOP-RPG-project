@@ -23,7 +23,7 @@ public:
     void ShowRecipe(std::ostream &os) const override;
 
 
-    int getRequiredLvl();
+    int getRequiredLvl() const;
 
     ~Equipment() override;
 
