@@ -13,6 +13,9 @@ public:
     Game();
 
     explicit Game(const std::string& dirr_name);
+    Game(const Game&);
+    Game& operator=(const Game&);
+
     void MainMenu();
 
     virtual ~Game();

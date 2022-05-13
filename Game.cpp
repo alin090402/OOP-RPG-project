@@ -306,5 +306,14 @@ Game::~Game() {
     Monster::reset();
 }
 
+Game::Game(const Game &) {
+    player = std::make_shared<Player>(*player);
+}
+
+Game &Game::operator=(const Game &) {
+    player = std::make_shared<Player>(*player);
+    return *this;
+}
+
 Game::Game() = default;
 
