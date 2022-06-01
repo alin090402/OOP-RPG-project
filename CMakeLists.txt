@@ -80,5 +80,5 @@ endif()
 
 # copy binaries to bin folder; these are uploaded as artifacts on each release
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-install(DIRECTORY data/ DESTINATION bin)
+install(DIRECTORY data/ DESTINATION bin/data)
 # install(FILES some_file1.txt some_file2.md DESTINATION bin)

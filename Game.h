@@ -18,7 +18,7 @@ public:
 
     void MainMenu();
 
-    virtual ~Game();
+    ~Game();
 
 private:
 

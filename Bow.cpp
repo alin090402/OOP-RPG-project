@@ -28,7 +28,6 @@ std::pair<int, double> Bow::SpecialAttack(std::shared_ptr<Entity> entity) {
     return {maxDamage * 2, 1};
 }
 
-/// e posibil sa fac direct atribuirea la contructori?
 Bow::Bow(int id, Item_type type, const std::string &name, const Stats &bonusStats, int price, int requiredLevel,
          const std::vector<std::pair<int, int>> &recipe, int minDamage, int maxDamage, int specialManaCost) : Weapon(id, type, name,
                                                                                                 bonusStats, price,

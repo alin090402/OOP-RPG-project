@@ -63,7 +63,7 @@ Stats Entity::stats() const {
 }
 
 std::vector<int> Entity::equipments() const {
-    return std::vector<int>{chestplate, boots, ring, helmet, weapon};
+    return std::vector<int>{chestplate, boots, ring, helmet, weapon}; // update when I add new equip
 }
 
 [[maybe_unused]] bool Entity::isAlive() const {

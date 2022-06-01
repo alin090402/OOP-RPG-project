@@ -4,6 +4,7 @@
 
 #include "Monster.h"
 #include "Utility.h"
+#include "Exception.h"
 
 #include <utility>
 #include <iostream>
@@ -35,7 +36,7 @@ void Monster::MonsterInit(const std::string &file_name) {
         data = Utility::CSVParser(line);
         if(data.empty()) continue;
         if(data.size() < 13)
-            throw std::runtime_error("Not enough data in monster file");
+            throw FileException("Not enough data in monster file");
         std::string name = data[0];
         Stats stats = Stats(std::stoi(data[1]), std::stoi(data[2]), std::stoi(data[3]),
                             std::stoi(data[4]),std::stoi(data[5]));

@@ -20,10 +20,6 @@ protected:
     Stats base_stats = Stats(0, 0, 0, 0, 0);
     int currentHP{};
     int currentMP{};
-private:
-    [[nodiscard]] std::vector<int> equipments() const;
-
-protected:
     int chestplate{};
     int boots{};
     int ring{};
@@ -54,6 +50,7 @@ public:
 
     [[nodiscard]] int getCurrentMp() const;
 
+    [[nodiscard]] std::vector<int> equipments() const;
 
 };
 

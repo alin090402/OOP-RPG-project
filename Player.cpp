@@ -10,6 +10,7 @@
 #include "Item.h"
 #include "Equipment.h"
 #include "Ingredient.h"
+#include "Exception.h"
 
 void Player::Loot(const std::shared_ptr<Monster>& monster) {
     coins += monster -> getGoldGiven();
@@ -144,6 +145,12 @@ bool Player::Sell(unsigned int id, unsigned int count) {
     {
         if(item.first == (int) id)
         {
+            auto ingredientP = dynamic_cast<Ingredient*>(Item::getItemList()[Item::getIdToPos(id)]);
+            if(!ingredientP)
+            {
+                throw BugException("You are trying to sell a product that is not sellable");
+            }
+
             if(item.second >= (int) count)
             {
                 item.second -= (int)count;

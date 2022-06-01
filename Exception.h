@@ -17,6 +17,10 @@ public:
     explicit FileException(const std::string &arg) : runtime_error(arg) {}
 };
 
+class BugException: public std::runtime_error{
+public:
+    explicit BugException(const std::string &arg) : runtime_error(arg){}
+};
 
 
 #endif //RPG_EXCEPTION_H

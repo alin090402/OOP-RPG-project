@@ -10,6 +10,7 @@
 #include "Equipment.h"
 #include "Sword.h"
 #include "Bow.h"
+#include "Exception.h"
 
 std::vector<Item*> Item::itemList;
 std::unordered_map<unsigned int, unsigned int> Item::id_to_pos;
@@ -18,7 +19,6 @@ std::unordered_map<unsigned int, unsigned int> Item::id_to_pos;
 Item::Item(int id, Item_type type, std::string name) : id(id), type(type), name(std::move(name)) {}
 
 void Item::ItemInit(const std::string& file_name) {
-    std::cout << "alo1" << std::endl;
     std::vector<std::string> lines = Utility::ReadFile(file_name);
 
     std::vector<std::string> data;
@@ -28,7 +28,7 @@ void Item::ItemInit(const std::string& file_name) {
 
        data = Utility::CSVParser(line);
        if(data.size() < 4)
-           throw std::runtime_error("Not enough data in file under 4");
+           throw FileException("Items - Not enough data in file under 4");
        std::string &tip = data[0];
         int id = std::stoi(data[1]);
         std::string name = data[2];
@@ -43,7 +43,7 @@ void Item::ItemInit(const std::string& file_name) {
         }
 
        if(data.size() < 10)
-           throw std::runtime_error("Not enough data in file under 10");
+           throw FileException("Items - Not enough data in file under 10");
         Stats stats(std::stoi(data[3]), std::stoi(data[4]), std::stoi(data[5]), std::stoi(data[6]), std::stoi(data[7]));
         int price = std::stoi(data[8]);
         int required_level = std::stoi(data[9]);
@@ -75,7 +75,7 @@ void Item::ItemInit(const std::string& file_name) {
             continue;
         }
        if(data.size() < 13)
-           throw std::runtime_error("Not enough data in file under 13");
+           throw FileException("Items - Not enough data in file under 13");
 
        int min_dmg = std::stoi(data[data.size() - 3]);
         int max_dmg = std::stoi(data[data.size() - 2]);
@@ -135,6 +135,8 @@ const std::string &Item::getName() const {
 }
 
 void Item::reset() {
+    for(auto item: itemList)
+        delete item;
     id_to_pos.clear();
     itemList.clear();
 }

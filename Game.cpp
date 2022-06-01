@@ -16,27 +16,10 @@ Game::Game(const std::string& dirr_name)
 {
     if(dirr_name.empty())
         throw FileException("Directory name is empty");
-    try{
-        Item::ItemInit(dirr_name + "/items.txt");
+    Item::ItemInit(dirr_name + "/items.txt");
+    Monster::MonsterInit(dirr_name + "/monsters.txt");
+    player = std::make_shared<Player>(Player(dirr_name + "/player.txt"));
 
-    }
-    catch (std::runtime_error& e){
-        throw FileException("Items file is corrupted, " + std::string(e.what()));
-    }
-    try{
-        Monster::MonsterInit(dirr_name + "/monsters.txt");
-
-    }
-    catch (std::runtime_error& e){
-        throw FileException("Monster file is corrupted");
-    }
-    try{
-        player = std::make_shared<Player>(Player(dirr_name + "/player.txt"));
-    }
-    catch (std::runtime_error& e){
-        std::cerr << e.what() << std::endl;
-        throw FileException("Players file is corrupted");
-    }
     Utility::Init();
 }
 
@@ -170,7 +153,7 @@ void Game::ShopMenu() {
         {
             choice = std::stoi(choice_);
         }
-        catch (std::runtime_error &err){
+        catch (std::invalid_argument &err){
             std::cout << "Invalid choice!\n";
             continue;
         }
@@ -224,7 +207,7 @@ void Game::Craft() {
         {
             choice = std::stoi(choice_);
         }
-        catch (std::runtime_error &err){
+        catch (std::invalid_argument &err){
             std::cout << "Invalid choice!\n";
             continue;
         }
@@ -275,7 +258,7 @@ void Game::Sell() {
         {
             choice = std::stoi(choice_);
         }
-        catch (std::runtime_error &err){
+        catch (std::invalid_argument &err){
             std::cout << "Invalid choice!\n";
             continue;
         }
@@ -299,8 +282,6 @@ void Game::Sell() {
 }
 
 Game::~Game() {
-    for(auto item : Item::getItemList())
-        delete item;
     Item::reset();
     Monster::reset();
 }

@@ -9,7 +9,11 @@ int main() {
         game.MainMenu();
     }
     catch (const FileException& e){
-        std::cerr << e.what() << std::endl;
+        std::cerr << "Error when retrieving data:" << e.what() << std::endl;
+        return 1;
+    }
+    catch (const std::runtime_error& e){
+        std::cerr << "Runtime error: " << e.what();
         return 1;
     }
 
