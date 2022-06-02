@@ -11,6 +11,8 @@
 #include "Exception.h"
 #include "Utility.h"
 #include "Ingredient.h"
+#include "RecordAttackBuilder.h"
+#include "RecordAttack.h"
 
 void Game::Init(const std::string& dirr_name)
 {
@@ -31,8 +33,8 @@ void Game::MainMenu() {
         std::cout << "1. Exit\n";
         std::cout << "2. Fight\n";
         std::cout << "3. Shop\n";
-        //std::cout << "3. Save\n";
-        //std::cout << "4. Load\n";
+        //std::cout << "4. Save\n";
+        //std::cout << "5. Load\n";
         std::cout << "Enter your choice: ";
         std::string choice_;
         std::cin >> choice_;
@@ -291,6 +293,10 @@ Game &Game::getGame() {
     static Game game;
     return game;
 
+}
+
+void Game::addAttackRecord(const RecordAttack& recordAttack) {
+    attack_history += recordAttack;
 }
 
 Game::Game() = default;

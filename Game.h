@@ -7,6 +7,8 @@
 
 
 #include "Player.h"
+#include "History.h"
+#include "RecordAttack.h"
 
 class Game {
 public:
@@ -18,9 +20,12 @@ public:
     static Game& getGame();
     ~Game();
 
+    void addAttackRecord(const RecordAttack& recordAttack);
+
 private:
     Game();
 
+    History<RecordAttack> attack_history;
 
     std::shared_ptr<Player> player;
     void Fight(const std::shared_ptr<Entity>& monster);

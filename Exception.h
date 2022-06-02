@@ -22,5 +22,10 @@ public:
     explicit BugException(const std::string &arg) : runtime_error(arg){}
 };
 
+class BuilderException: public std::runtime_error{
+public:
+    explicit BuilderException(const std::string &arg): std::runtime_error(arg){}
+};
+
 
 #endif //RPG_EXCEPTION_H

@@ -8,6 +8,8 @@
 #include "Utility.h"
 #include <utility>
 #include "Exception.h"
+#include "RecordAttackBuilder.h"
+#include "Game.h"
 
 Entity::Entity(std::string name, const Stats &baseStats, int chestplate, int boots, int ring, int helmet, int weapon)
         : name(std::move(name)), base_stats(baseStats), currentHP(baseStats.getHp()), currentMP(baseStats.getMana()),
@@ -35,12 +37,15 @@ void Entity::Attack(const std::shared_ptr<Entity>& enemy, Attack_type attackType
         }
         if (Utility::Random() < damage.second)
             enemy->currentHP -= std::max(damage.first - enemy->stats().getDef(), 0);
-        std:: cout << name << " " << damage.first << " " << damage.second << std::endl;
     }
     else {
+        damage = std::make_pair(0, 0.0);
         std::cout << "No weapon equipped" << std::endl;
     }
-
+    enemy->currentHP -= std::max(damage.first - enemy->stats().getDef(), 0);
+    RecordAttackBuilder attackBuilder;
+    attackBuilder.Name(this->name).Damage(damage.first).EnemyName(enemy->name).EnemyHP(enemy->currentHP);
+    Game::getGame().addAttackRecord(attackBuilder.build());
 }
 
 Stats Entity::stats() const {
