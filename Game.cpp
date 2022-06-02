@@ -12,7 +12,7 @@
 #include "Utility.h"
 #include "Ingredient.h"
 
-Game::Game(const std::string& dirr_name)
+void Game::Init(const std::string& dirr_name)
 {
     if(dirr_name.empty())
         throw FileException("Directory name is empty");
@@ -286,13 +286,11 @@ Game::~Game() {
     Monster::reset();
 }
 
-Game::Game(const Game &) {
-    player = std::make_shared<Player>(*player);
-}
+Game &Game::getGame() {
 
-Game &Game::operator=(const Game &) {
-    player = std::make_shared<Player>(*player);
-    return *this;
+    static Game game;
+    return game;
+
 }
 
 Game::Game() = default;

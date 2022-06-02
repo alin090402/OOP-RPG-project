@@ -5,8 +5,8 @@
 
 int main() {
     try{
-        Game game = Game("data");
-        game.MainMenu();
+        Game::getGame().Init("data");
+        Game::getGame().MainMenu();
     }
     catch (const FileException& e){
         std::cerr << "Error when retrieving data:" << e.what() << std::endl;
