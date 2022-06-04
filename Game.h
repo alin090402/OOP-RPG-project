@@ -23,7 +23,7 @@ public:
 
     void addAttackRecord(const RecordAttack& recordAttack);
 
-    void addFightRecord(RecordFight fight);
+    void addFightRecord(const RecordFight& fight);
 
 private:
     Game();

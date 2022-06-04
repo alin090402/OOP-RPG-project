@@ -356,7 +356,7 @@ Game::Game():attack_history(), fight_history()
     attack_history.setMaximRecords(50);
 }
 
-void Game::addFightRecord(RecordFight fight) {
+void Game::addFightRecord(const RecordFight& fight) {
     fight_history += fight;
 }
 
