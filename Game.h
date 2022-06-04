@@ -32,15 +32,16 @@ private:
     void FightMenu();
 
     void ShopMenu();
-
+/*
     void Save();
 
     void Load();
-
+*/
     void Craft();
 
     void Sell();
 
+    void ShowHistory();
 };
 
 #endif //RPG_GAME_H

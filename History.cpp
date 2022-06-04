@@ -19,13 +19,13 @@ template<typename T>
 void History<T>::Sort() {
     std::sort(records.begin(), records.end());
 }
-
+/*
 template<typename T>
 std::vector<T> History<T>::GetLast(int n) {
     if(n > records.size())
         n = records.size();
     return std::vector<T>(records.end() - n, records.end());
-}
+}*/
 
 template<typename T>
 void History<T>::setMaximRecords(int maximRecords_) {

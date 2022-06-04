@@ -8,7 +8,7 @@
 #include <ostream>
 #include <deque>
 
-///As putea sa fac clasa template sa accepte doar alte clasa care mostenesc Record
+///As putea sa fac clasa template sa accepte doar alte clase care mostenesc Record
 template<typename T> class History;
 
 template<typename T>
@@ -23,8 +23,11 @@ public:
     }
     void Sort();
 
-    std::vector<T> GetLast(int n);
-
+    std::vector<T> GetLast(int n){
+        if(n >(int) records.size())
+            n = (int)records.size();
+        return std::vector<T>(records.end() - n, records.end());
+    }
     void setMaximRecords(int maximRecords);
     ///returneaza ultimele n inregistrari
 private:

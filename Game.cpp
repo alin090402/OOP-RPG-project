@@ -34,6 +34,7 @@ void Game::MainMenu() {
         std::cout << "2. Fight\n";
         std::cout << "3. Shop\n";
         std::cout << "4. Profile\n";
+        std::cout << "5. History\n";
         //std::cout << "4. Save\n";
         //std::cout << "5. Load\n";
         std::cout << "Enter your choice: ";
@@ -60,6 +61,9 @@ void Game::MainMenu() {
                 break;
             case 4:
                 std::cout << *player;
+                break;
+            case 5:
+                ShowHistory();
                 break;
             /*case 4:
                 Save();
@@ -302,6 +306,12 @@ Game &Game::getGame() {
 
 void Game::addAttackRecord(const RecordAttack& recordAttack) {
     attack_history += recordAttack;
+}
+
+void Game::ShowHistory() {
+    for(const auto& record: attack_history.GetLast(20))
+        std::cout << record << "\n";
+
 }
 
 Game::Game() = default;
