@@ -11,17 +11,27 @@
 #include "Equipment.h"
 #include "Ingredient.h"
 #include "Exception.h"
+#include "RecordFight.h"
+#include "Game.h"
+
+class getGame;
 
 void Player::Loot(const std::shared_ptr<Monster>& monster) {
     coins += monster -> getGoldGiven();
+    std::vector<std::pair<int,int> >ItemsGot;
     IncreaseExperience(monster->getXpGiven());
     auto random = Utility::Random((unsigned int)monster->getLoot().size());
     for(unsigned int i = 0; i < monster->getLoot().size(); i++)
     {
-        std::cout << "random" << random[i] << std::endl;
         if(random[i] <= monster->getLoot()[i].second)
+        {
             GetItem(monster->getLoot()[i].first, 1);
+            ItemsGot.push_back(std::make_pair(monster->getLoot()[i].first, 1));
+        }
     }
+    Game::getGame().addFightRecord( RecordFight(name, monster->getName(),  monster->getXpGiven(), monster->getGoldGiven(), ItemsGot) );
+
+
 }
 
 void Player::IncreaseExperience(int xp) {

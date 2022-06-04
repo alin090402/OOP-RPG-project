@@ -24,8 +24,6 @@ void Item::ItemInit(const std::string& file_name) {
     std::vector<std::string> data;
 
    for(auto& line : lines) {
-        std::cout << line << std::endl;
-
        data = Utility::CSVParser(line);
        if(data.size() < 4)
            throw FileException("Items - Not enough data in file under 4");

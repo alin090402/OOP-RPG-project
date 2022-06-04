@@ -141,6 +141,7 @@ void Game::Fight(const std::shared_ptr<Entity>& monster) {
         }
         if(monster->isAlive())
             monster->Attack(player, Attack_type::Medium_Attack);
+
     }
 
     if(player->isAlive())
@@ -207,7 +208,7 @@ void Game::Craft() {
         for(unsigned int i = 0; i < Item::getItemList().size(); i++)
             if(Item::getItemList()[i]->Craftable()) {
                 std::cout << i + 2 << ". ";
-                std::cout << Item::getItemList()[i]->getName() << "You need: \n";
+                std::cout << Item::getItemList()[i]->getName() << "\nYou need: \n";
                 Item::getItemList()[i]->ShowRecipe(std::cout);
                 std::cout << "coins x" << Item::getItemList()[i]->getGoldPrice() <<"\n";
             }
@@ -310,13 +311,52 @@ void Game::addAttackRecord(const RecordAttack& recordAttack) {
 }
 
 void Game::ShowHistory() {
+    while(true)
+    {
+        std::cout << "History\n";
+        std::cout << "1. Exit\n";
+        std::cout << "2.Fight history:\n";
+        std::cout << "3.Attack history:\n";
+        std::cout << "Enter your choice: ";
+        std::string choice_;
+        std::cin >> choice_;
+        int choice;
+        try
+        {
+            choice = std::stoi(choice_);
+        }
+        catch (std::invalid_argument &err){
+            std::cout << "Invalid choice!\n";
+            continue;
+        }
+        switch (choice) {
+            case 1:
+                return;
+            case 2:
+                for(const auto& record: fight_history.GetLast(20))
+                    std::cout << record << "\n";
+                break;
+            case 3:
+                for(const auto& record: attack_history.GetLast(10))
+                    std::cout << record << "\n";
+                break;
+            default:
+                std::cout << "Invalid choice!\n";
+                continue;
+        }
+    }
     for(const auto& record: attack_history.GetLast(20))
         std::cout << record << "\n";
 
 }
 
-Game::Game():attack_history()
+Game::Game():attack_history(), fight_history()
 {
+    fight_history.setMaximRecords(20);
     attack_history.setMaximRecords(50);
+}
+
+void Game::addFightRecord(RecordFight fight) {
+    fight_history += fight;
 }
 

@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "History.h"
 #include "RecordAttack.h"
+#include "RecordFight.h"
 
 class Game {
 public:
@@ -22,10 +23,13 @@ public:
 
     void addAttackRecord(const RecordAttack& recordAttack);
 
+    void addFightRecord(RecordFight fight);
+
 private:
     Game();
 
     History<RecordAttack> attack_history;
+    History<RecordFight> fight_history;
 
     std::shared_ptr<Player> player;
     void Fight(const std::shared_ptr<Entity>& monster);
