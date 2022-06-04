@@ -17,7 +17,7 @@ History<T> &operator += (History<T> &history, const T &record)
 
 template<typename T>
 void History<T>::Sort() {
-    std::sort(records.begin(), records.end());
+    sort(records.begin(), records.end());
 }
 /*
 template<typename T>

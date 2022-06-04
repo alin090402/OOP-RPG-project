@@ -10,6 +10,7 @@
 /// Record Interface
 class Record {
 public:
+    virtual ~Record();
     bool operator<(const Record &rhs) const;
 
     Record();

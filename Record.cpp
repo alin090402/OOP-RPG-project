@@ -15,3 +15,5 @@ bool Record::operator<(const Record &rhs) const {
     return timestamp < rhs.timestamp;
 }
 
+Record::~Record() = default;
+
