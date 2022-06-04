@@ -27,6 +27,8 @@ public:
 
     ~Equipment() override;
 
+    int getGoldPrice() const override;
+
 protected:
     void Afisare(std::ostream &os)const override;
 

@@ -33,6 +33,7 @@ void Game::MainMenu() {
         std::cout << "1. Exit\n";
         std::cout << "2. Fight\n";
         std::cout << "3. Shop\n";
+        std::cout << "4. Profile\n";
         //std::cout << "4. Save\n";
         //std::cout << "5. Load\n";
         std::cout << "Enter your choice: ";
@@ -58,12 +59,15 @@ void Game::MainMenu() {
                 ShopMenu();
                 break;
             case 4:
+                std::cout << *player;
+                break;
+            /*case 4:
                 Save();
                 break;
             case 5:
                 Load();
                 break;
-
+*/
             default:
                 std::cout << "Invalid choice!\n";
                 break;
@@ -179,14 +183,14 @@ void Game::ShopMenu() {
 
 
 }
-
+/*
 void Game::Save() {
 
 }
 
 void Game::Load() {
 
-}
+}*/
 
 void Game::Craft() {
 
@@ -198,8 +202,9 @@ void Game::Craft() {
         for(unsigned int i = 0; i < Item::getItemList().size(); i++)
             if(Item::getItemList()[i]->Craftable()) {
                 std::cout << i + 2 << ". ";
+                std::cout << Item::getItemList()[i]->getName() << "You need: \n";
                 Item::getItemList()[i]->ShowRecipe(std::cout);
-                std::cout << "\n";
+                std::cout << "coins x" << Item::getItemList()[i]->getGoldPrice() <<"\n";
             }
         std::cout << "Enter your choice: ";
         std::string choice_;
@@ -225,7 +230,7 @@ void Game::Craft() {
             std::cout << "You can't craft this item!\n";
             continue;
         }
-        if(!player->Craft(choice - 2))
+        if(!player->Craft(Item::getItemList()[choice - 2]->getId()))
         {
             std::cout << "You don't have enough materials!\n";
             continue;

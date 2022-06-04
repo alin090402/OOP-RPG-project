@@ -52,6 +52,7 @@ public:
 
     [[nodiscard]] std::vector<int> equipments() const;
 
+    void ShowEquipment(std::ostream &os) const;
 };
 
 

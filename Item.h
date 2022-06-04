@@ -14,7 +14,7 @@
 
 enum class Item_type {Chestplate, Boots, Ring, Helmet, Ingredient, Sword, Bow, None};
 
- class Item {
+class Item {
  public:
      Item(int id, Item_type type, std::string name);
 
@@ -29,7 +29,7 @@ enum class Item_type {Chestplate, Boots, Ring, Helmet, Ingredient, Sword, Bow, N
 
      [[nodiscard]] virtual bool Sellable() const;
 
-
+    [[nodiscard]] virtual int getGoldPrice() const;
      virtual void ShowRecipe(std::ostream &os) const;
 
      static const std::vector<Item *> &getItemList();
@@ -41,6 +41,8 @@ enum class Item_type {Chestplate, Boots, Ring, Helmet, Ingredient, Sword, Bow, N
      [[nodiscard]] const std::string &getName() const;
 
      static void reset();
+
+     int getId() const;
 
  protected:
      int id;

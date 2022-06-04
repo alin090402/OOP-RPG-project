@@ -90,7 +90,8 @@ std::ostream &operator<<(std::ostream &os, const Player &player) {
     std::cout << " \ninventory: ";
 
     for(auto item: player.inventory)
-        os << "\n" << item.first << " " << item.second;
+        os << "\n" << Item::getItemList()[Item::getIdToPos(item.first)]->getName() << " x" << item.second;
+    os << "\n";
 
     return os;
 }

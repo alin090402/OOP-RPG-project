@@ -76,10 +76,17 @@ std::vector<int> Entity::equipments() const {
 }
 
 std::ostream &operator<<(std::ostream &os, const Entity &entity) {
-    os << "name: " << entity.name << "\nbase_stats: " << entity.base_stats << "\ncurrentHP: " << entity.currentHP
-       << "\nchestplate: " << entity.chestplate << "\nboots: " << entity.boots << "\nring: " << entity.ring << "\nhelmet: "
-       << entity.helmet << "\nweapon: " << entity.weapon;
+    os << "name: " << entity.name << "\nbase_stats: " << entity.base_stats << "\ncurrentHP: " << entity.currentHP << "\n";
+    entity.ShowEquipment(os);
     return os;
+}
+
+void Entity::ShowEquipment(std::ostream &os) const {
+    os << "Chestplate: " << Item::getItemList()[Item::getIdToPos(chestplate)]->getName() << std::endl;
+    os << "Boots: " << Item::getItemList()[Item::getIdToPos(boots)]->getName() << std::endl;
+    os << "Ring: " << Item::getItemList()[Item::getIdToPos(ring)]->getName() << std::endl;
+    os << "Helmet: " << Item::getItemList()[Item::getIdToPos(helmet)]->getName() << std::endl;
+    os << "Weapon: " << Item::getItemList()[Item::getIdToPos(weapon)]->getName() << std::endl;
 }
 
 const std::string &Entity::getName() const {

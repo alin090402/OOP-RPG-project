@@ -23,9 +23,7 @@ void Equipment::Afisare(std::ostream &os) const{
     os << "Price: " << price << std::endl;
     os << "Required level: " << requiredLevel << std::endl;
     os << "Recipe: " << std::endl;
-    for (auto &i : recipe) {
-        os << "  " << i.first << " " << i.second << std::endl;
-    }
+    ShowRecipe(os);
 }
 
 bool Equipment::Craftable() const {
@@ -34,7 +32,7 @@ bool Equipment::Craftable() const {
 
 void Equipment::ShowRecipe(std::ostream &os) const {
     for(auto &i : recipe) {
-        os<< i.first << " " << i.second << "\n";
+        os<< Item::getItemList()[Item::getIdToPos(i.first)]->getName() << "x" << i.second << "\n";
     }
 }
 
@@ -44,6 +42,10 @@ int Equipment::getRequiredLvl() const {
 
 std::shared_ptr<Item> Equipment::clone() const {
     return std::make_shared<Equipment>(*this);
+}
+
+int Equipment::getGoldPrice() const {
+    return price;
 }
 
 Equipment::~Equipment() = default;

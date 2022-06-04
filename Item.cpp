@@ -141,5 +141,13 @@ void Item::reset() {
     itemList.clear();
 }
 
+int Item::getId() const {
+    return id;
+}
+
+int Item::getGoldPrice() const {
+    return 0;
+}
+
 
 Item::~Item() = default;
