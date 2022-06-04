@@ -21,14 +21,15 @@ public:
             records.pop_front();
         return *this;
     }
-    void Sort();
 
     std::vector<T> GetLast(int n){
         if(n >(int) records.size())
             n = (int)records.size();
         return std::vector<T>(records.end() - n, records.end());
     }
-    void setMaximRecords(int maximRecords);
+    [[maybe_unused]]void setMaximRecords(int maximRecords_){
+        maximRecords = maximRecords_;
+    }
     ///returneaza ultimele n inregistrari
 private:
     int maximRecords = 1000;

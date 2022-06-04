@@ -22,6 +22,7 @@ void Game::Init(const std::string& dirr_name)
     Monster::MonsterInit(dirr_name + "/monsters.txt");
     player = std::make_shared<Player>(Player(dirr_name + "/player.txt"));
 
+
     Utility::Init();
 }
 
@@ -314,5 +315,8 @@ void Game::ShowHistory() {
 
 }
 
-Game::Game() = default;
+Game::Game():attack_history()
+{
+    attack_history.setMaximRecords(50);
+}
 
